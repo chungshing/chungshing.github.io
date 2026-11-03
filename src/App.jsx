@@ -52,7 +52,7 @@ const PROJECTS = [
     {
         title: 'Hospitality Booking Platform',
         description:
-            'Behind every hotel booking is a series of moving parts — availability checks, user authentication, reservation logic. Building it meant connecting those moving parts into one cohesive full-stack system.',
+            'A project that got me exploring how all the pieces of a booking system fit together, from checking room availability to handling reservations and connecting everything through one application.',
         note: '✦ Exploring SQL and NoSQL in one booking platform.',
         stack: ['Node.js', 'EJS', 'MySQL', 'MongoDB'],
         links: [
@@ -91,7 +91,7 @@ const PROJECTS = [
     {
         title: 'Yelp Big Data Pipeline',
         description:
-            'Explored how large datasets can be processed beyond a traditional application. Built a distributed data pipeline using Hadoop and Spark to store, clean, transform, analyse, and visualize the Yelp Open Dataset.',
+            'A chance to play around with big data and see what happens when datasets get too large for a regular application. I used Hadoop and Spark to process the Yelp Open Dataset and explore the insights hidden in it.',
         note: '✦ From raw JSON to distributed processing and data-driven insights.',
         stack: ['Java', 'Hadoop', 'HDFS', 'Spark', 'Python', 'Data Visualization'],
         links: [
@@ -146,11 +146,11 @@ const EXPERIENCE = [
         mode: 'Hybrid',
         period: 'May 2025 — Apr 2026',
         description:
-            'I built full-stack MES applications for semiconductor manufacturing, turning manual processes into workflows that actually made sense.',
+            'A year of getting familiar with semiconductor workflows and finding ways to make everyday processes a little less manual.',
         highlights: [
-            'Developed production-ready full-stack MES applications using Java and JavaScript.',
-            'Automated multiple manufacturing workflows, cutting manual tracking effort by around 80%.',
-            'Designed validation and approval workflows that improved data integrity and operational visibility.',
+            'Spent time extending the existing MES application, figuring out how different manufacturing workflows could fit into it.',
+            'Helped move 4 out of 5 manual approval steps online, saving around 8 hours of manual work each week.',
+            'Got to see features through from start to finish, from chatting with process engineers about their needs to testing and deploying the final changes.',
         ],
     },
     {
@@ -161,11 +161,11 @@ const EXPERIENCE = [
         mode: 'On-site',
         period: 'Aug 2019 — Feb 2020',
         description:
-            'My first real experience shipping code — backend APIs, testing, deployment, and everything in between.',
+            'Where I first got my hands dirty with real-world software development, from building APIs to testing features and chasing down bugs.',
         highlights: [
-            'Developed backend APIs and CRUD functionality using Java.',
-            'Built responsive web interfaces with HTML, CSS, and JavaScript.',
-            'Performed functional and regression testing to support stable production releases.',
+            'Spent time building Java APIs and figuring out how the backend connects with the rest of the application.',
+            'Got involved in the frontend too, working with HTML and JavaScript on the AGC Intelligent Workspace.',
+            'Put new features through their paces with 80+ test cases, catching bugs along the way.',
         ],
     },
 ];
@@ -176,7 +176,7 @@ const EDUCATION = [
         org: 'Singapore Institute of Technology • Singapore',
         period: '2022 — 2026',
         description:
-            'Four years turning lecture-hall theory into internships, projects, and one unexpected research paper on vishing attacks.',
+            'Four years of lectures, group projects, late-night coding, and figuring things out along the way. Somewhere in between, I even ended up co-authoring a research paper on vishing attacks.',
         link: {
             label: 'Read →',
             title: '✦ Published at IEEE SOLI 2023 • Detecting Vishing Attacks...',
@@ -188,7 +188,7 @@ const EDUCATION = [
         org: 'Nanyang Polytechnic • Singapore',
         period: '2019 — 2022',
         description:
-            'I built a strong foundation in programming, web development, databases, and software engineering — the starting point for everything that followed.',
+            'This was where I started getting into programming, building web applications, working with databases, and discovering that I actually enjoyed making things with code.',
     },
 ];
 
@@ -249,16 +249,18 @@ export default function App() {
                             <p className='subtitle'>Slow builds, steady progress.</p>
                             <div className='card'>
                                 <p style={{ marginTop: 0 }}>
-                                    I enjoy understanding how software works beneath the UI. Most of
-                                    what I build leans toward backend systems, full-stack
-                                    applications, and automation—building solutions that solve real
-                                    problems while teaching me something new.
+                                    I've always enjoyed figuring out how things work, especially the
+                                    bits happening behind the screen. Somewhere along the way, that
+                                    curiosity turned into an interest in backend development,
+                                    full-stack applications, and building things that solve everyday
+                                    problems.
                                 </p>
                                 <p style={{ marginBottom: 0 }}>
-                                    Most projects begin with a question—an API I want to explore, a
-                                    workflow I think could be smoother, or a dataset that deserves a
-                                    better way to be visualized. I'd rather ship something small and
-                                    working than plan something perfect and stalled.
+                                    Most of my projects start with a random idea or something I want
+                                    to figure out. Sometimes it's an API, sometimes a workflow that
+                                    could be a little smoother, or just something I thought would
+                                    be fun to build. A lot of learning happens along the way, and
+                                    that's probably my favourite part of it.
                                 </p>
                             </div>
                             <p className='margin-note'>✎ curiosity is where my projects begin</p>
@@ -269,7 +271,7 @@ export default function App() {
                         <section id='experience'>
                             <p className='eyebrow'>learning by building</p>
                             <h2>Journey</h2>
-                            <p className='subtitle'>From the classroom to real-world software.</p>
+                            <p className='subtitle'>A few stops along the way.</p>
 
                             <div className='notebook-tabs mono'>
                                 <button
