@@ -152,6 +152,13 @@ const EXPERIENCE = [
             'Helped move 4 out of 5 manual approval steps online, saving around 8 hours of manual work each week.',
             'Got to see features through from start to finish, from chatting with process engineers about their needs to testing and deploying the final changes.',
         ],
+        description:
+          'A year of getting familiar with semiconductor workflows and finding ways to make everyday processes a little less manual.',
+        highlights: [
+          'Helped move 4 out of 5 manual approval steps into the existing MES workflow, saving around 8 hours of manual work each week.',
+          'Extended the MES application with Java and JavaScript, adding workflow support for different manufacturing operations.',
+          'Worked on features from start to finish, from gathering requirements with process engineers to testing and deploying the changes.',
+        ],
     },
     {
         role: 'Software Developer / Tester',
