@@ -91,10 +91,6 @@
     margin: 0 0 4px;
 }
 
-.hero-card .eyebrow {
-    margin-top: 16px;
-}
-
 [data-piixpal] {
     filter: brightness(1.6) drop-shadow(0 0 1px #e8c4a0);
 }
