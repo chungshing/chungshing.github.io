@@ -1,5 +1,8 @@
 import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
+import { PiixPal } from 'piixpal/react';
 import { useEffect, useState } from 'react';
+
+const KITTY_SRC = 'https://cdn.jsdelivr.net/npm/piixpal@0.4/dist/c/kitty.min.js';
 
 const PHRASES = ['coffee brewing...', 'late night debugging...', 'ideas becoming reality...'];
 
@@ -48,6 +51,7 @@ export default function HeroCard() {
 
     return (
         <div className='hero-card'>
+            <PiixPal pal='kitty' src={KITTY_SRC} edge='box' at={0.85} />
             <p className='eyebrow'>developer's corner</p>
             <h1 className='hero-name'>Chung Shing</h1>
             <p className='hero-role mono'>Software Engineer, Singapore</p>
