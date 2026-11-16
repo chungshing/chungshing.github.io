@@ -4,6 +4,7 @@ import CoderCard from './CoderCard.jsx';
 import ContactForm from './ContactForm.jsx';
 import HeroCard from './HeroCard.jsx';
 import LofiBar from './LofiBar.jsx';
+import MarginNote from './MarginNote.jsx';
 import Navbar from './Navbar.jsx';
 
 const PROJECTS = [
@@ -263,7 +264,7 @@ export default function App() {
                                     that's probably my favourite part of it.
                                 </p>
                             </div>
-                            <p className='margin-note'>✎ curiosity is where my projects begin</p>
+                            <MarginNote>✎ curiosity is where my projects begin</MarginNote>
                         </section>
 
                         <hr className='section-divider' />
@@ -429,10 +430,10 @@ export default function App() {
                                 ))}
                             </div>
 
-                            <p className='margin-note'>
+                            <MarginNote>
                                 ✎ The stack changes, but the goal stays the same: build something
                                 useful.
-                            </p>
+                            </MarginNote>
                         </section>
 
                         <hr className='section-divider' />
