@@ -246,7 +246,7 @@ export default function App() {
                         <section id='about'>
                             <p className='eyebrow'>behind the keyboard</p>
                             <h2>About Me</h2>
-                            <p className='subtitle'>Slow builds, steady progress.</p>
+                            <p className='subtitle'>Mostly curious. Occasionally caffeinated.</p>
                             <div className='card'>
                                 <p style={{ marginTop: 0 }}>
                                     I've always enjoyed figuring out how things work, especially the
@@ -347,7 +347,7 @@ export default function App() {
                         <section id='projects'>
                             <p className='eyebrow'>pages from the notebook</p>
                             <h2>Featured Work</h2>
-                            <p className='subtitle'>Things I've built along the way.</p>
+                            <p className='subtitle'>Things I built, broke, and fixed.</p>
                             <div className='project-list'>
                                 {PROJECTS.map((p) => (
                                     <div className='card project-card' key={p.title}>
