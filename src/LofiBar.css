@@ -24,15 +24,8 @@
     transform-origin: top left;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .lofi-radio {
-        right: 12px;
-        bottom: 12px;
-        width: 250px;
-        height: 54px;
-    }
-
-    .lofi-radio__iframe {
-        transform: scale(0.78125);
+        display: none;
     }
 }
