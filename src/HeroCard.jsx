@@ -56,9 +56,11 @@ export default function HeroCard() {
             <h1 className='hero-name'>Chung Shing</h1>
             <p className='hero-role mono'>Software Engineer, Singapore</p>
             <p className='hero-tagline'>
-                Turning ideas into software,
+                Building things,
                 <br />
-                one page at a time.
+                chasing interests,
+                <br />
+                enjoying the ride.
             </p>
             <p className='hero-status mono'>
                 {typed}

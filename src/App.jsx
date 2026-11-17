@@ -263,6 +263,12 @@ export default function App() {
                                     fun to build. A lot of learning happens along the way, and
                                     that's probably my favourite part of it.
                                 </p>
+                                <p style={{ marginBottom: 0 }}>
+                                    Outside of that, I'm usually following some kind of sport,
+                                    gaming, planning my next trip or spending time with friends.
+                                    There's always something going on, and I like keeping it that
+                                    way.
+                                </p>
                             </div>
                             <MarginNote>✎ curiosity is where my projects begin</MarginNote>
                         </section>
