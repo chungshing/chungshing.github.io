@@ -1,9 +1,13 @@
+import { PiixPal } from 'piixpal/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import SiteFooter from '../../components/SiteFooter.jsx';
 import { ASSETS_BASE, HERO, LINKS, RECEIPT, TRACKS, TRIPS } from './content.js';
 import './life.css';
 
+// a capybara reading the sign-off line (the portfolio has the kitty)
+const CAPY_SRC = 'https://cdn.jsdelivr.net/npm/piixpal@0.4/dist/c/capy.min.js';
 const FONTS =
-    'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;700&family=Lora:wght@400;500&family=Fira+Code:wght@400;500&display=swap';
+    'https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Lora:wght@400;500&family=Fira+Code:wght@400;500&display=swap';
 const TONES = [
     ['#C98A4B', '#7C4A22'],
     ['#A3A97C', '#4F5226'],
@@ -171,7 +175,14 @@ function Cassette() {
             </g>
             <rect x='28' y='28' width='304' height='104' rx='6' fill='#F5ECD7' />
             <rect x='28' y='28' width='304' height='26' rx='6' fill='#66652F' />
-            <text x='42' y='47' fontFamily='Instrument Serif,serif' fontSize='20' fill='#F5ECD7'>
+            <text
+                x='42'
+                y='47'
+                fontFamily='Caveat,cursive'
+                fontWeight='700'
+                fontSize='24'
+                fill='#F5ECD7'
+            >
                 Side A — on repeat
             </text>
             <g fontFamily='Caveat,cursive' fontWeight='700' fontSize='22' fill='#3A2819'>
@@ -285,6 +296,22 @@ export default function Life() {
                         worth keeping. Some travel memories, a bit of music, good coffee and
                         whatever else finds its way here. Pull up a chair.
                     </p>
+                    <p className='lf-daynote'>
+                        <svg
+                            width='38'
+                            height='38'
+                            viewBox='0 0 40 40'
+                            {...doodle}
+                            aria-hidden='true'
+                        >
+                            <circle cx='20' cy='20' r='7' />
+                            <path d='M20 4v5M20 31v5M4 20h5M31 20h5M8.7 8.7l3.5 3.5M27.8 27.8l3.5 3.5M31.3 8.7l-3.5 3.5M12.2 27.8l-3.5 3.5' />
+                        </svg>
+                        <span className='lf-hand'>
+                            bright on purpose: the portfolio is the night desk, this is the
+                            daylight.
+                        </span>
+                    </p>
                 </div>
                 <div className='lf-stack'>
                     {HERO.slice(0, 3).map((h, i) => (
@@ -369,8 +396,12 @@ export default function Life() {
                 </Reveal>
             </div>
 
-            <footer className='lf-foot'>
+            <div className='lf-foot'>
                 <Reveal>
+                    <p className='lf-bye'>
+                        that’s the tour.
+                        <PiixPal pal='capy' src={CAPY_SRC} at={0.06} />
+                    </p>
                     <div className='lf-doodles'>
                         <svg
                             width='54'
@@ -399,15 +430,16 @@ export default function Life() {
                             <circle cx='57' cy='22' r='2' />
                         </svg>
                     </div>
-                    <span className='lf-hand lf-bye'>that’s the tour. thanks for stopping by.</span>
                     <p className='lf-back'>
-                        back to the <a href={LINKS.portfolio}>portfolio</a> · say hi on{' '}
+                        back to the <a href={LINKS.portfolio}>night desk (portfolio)</a> · say hi on{' '}
                         <a href={LINKS.linkedin} target='_blank' rel='noopener noreferrer'>
                             LinkedIn
                         </a>
                     </p>
                 </Reveal>
-            </footer>
+            </div>
+
+            <SiteFooter motto='wander · eat · listen · repeat' fixed />
 
             <Lightbox view={view} onClose={close} onNav={nav} />
         </div>

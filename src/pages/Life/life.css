@@ -1,4 +1,15 @@
 /* /life — everything is scoped under .life (or html.life-route) so the homepage is untouched. */
+html.life-route {
+    color-scheme: light;
+    /* page still scrolls, but no scrollbar takes width: content centres on the full window, like the portfolio */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+html.life-route::-webkit-scrollbar,
+html.life-route body::-webkit-scrollbar {
+    display: none;
+    width: 0;
+}
 html.life-route,
 html.life-route body,
 html.life-route #root {
@@ -16,6 +27,9 @@ html.life-route body {
     --ink: #3a2819;
     --soft: #6f5a45;
     --rust: #c25e1b;
+    --sf-border: var(--tan);
+    --sf-text: var(--soft);
+    --sf-bg: var(--bg);
     --rust-text: #9a4513;
     --rule: rgba(58, 40, 25, 0.08);
     --olive: #66652f;
@@ -23,7 +37,7 @@ html.life-route body {
     --shadow: rgba(58, 40, 25, 0.28);
     min-height: 100vh;
     padding-top: env(safe-area-inset-top, 0px);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
     background-color: var(--bg);
     background-image:
         repeating-linear-gradient(transparent 0 31px, var(--rule) 31px 32px),
@@ -35,19 +49,6 @@ html.life-route body {
         serif;
     overflow-x: hidden;
 }
-@media (prefers-color-scheme: dark) {
-    html.life-route body {
-        background: #2a2017;
-    }
-    .life {
-        --bg: #2a2017;
-        --ink: #f1e6cf;
-        --soft: #bba787;
-        --shadow: rgba(0, 0, 0, 0.5);
-        --rust-text: #e69a5c;
-        --rule: rgba(241, 230, 207, 0.06);
-    }
-}
 .life *,
 .life *::before,
 .life *::after {
@@ -55,21 +56,27 @@ html.life-route body {
 }
 .life h1,
 .life h2 {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-weight: 400;
-    line-height: 0.95;
     margin: 0;
     color: var(--ink);
 }
+/* same display fonts as the portfolio: Caveat for the big title, Fira Code for section headings */
 .life h1 {
-    font-size: clamp(3.6rem, 12vw, 8.5rem);
-    letter-spacing: -0.02em;
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: clamp(4.4rem, 14vw, 9.5rem);
+    line-height: 0.88;
+    letter-spacing: -0.01em;
 }
 .life h1 i {
+    font-style: normal;
     color: var(--olive);
 }
 .life h2 {
-    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-family: 'Fira Code', ui-monospace, monospace;
+    font-weight: 500;
+    font-size: clamp(1.7rem, 4vw, 2.3rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
 }
 .life p {
     color: var(--ink);
@@ -170,6 +177,23 @@ html.life-route body {
     z-index: 2;
 }
 
+.life .lf-daynote {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    max-width: 40ch;
+    margin-top: 1.3rem;
+    color: var(--rust-text);
+}
+.life .lf-daynote svg {
+    flex: none;
+}
+.life .lf-daynote .lf-hand {
+    font-size: 1.35rem;
+    color: var(--rust-text);
+    transform: rotate(-1deg);
+}
+
 /* hero */
 .life .lf-hero {
     display: grid;
@@ -188,6 +212,7 @@ html.life-route body {
 .life .lf-stack {
     position: relative;
     height: 470px;
+    margin-bottom: 2.5rem;
 }
 .life .lf-stack .lf-pol {
     position: absolute;
@@ -212,7 +237,7 @@ html.life-route body {
 .life .lf-arrow {
     position: absolute;
     right: 4%;
-    bottom: -34px;
+    bottom: -66px;
     font-size: 1.5rem;
     transform: rotate(8deg);
 }
@@ -301,6 +326,9 @@ html.life-route body {
 }
 
 /* everything else: cassette + receipt */
+.life [data-piixpal] {
+    filter: drop-shadow(0 1px 0 rgba(58, 40, 25, 0.25));
+}
 .life .lf-misc {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -387,15 +415,21 @@ html.life-route body {
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 1.6rem;
+    margin: 1.8rem 0 1.4rem;
     color: var(--rust);
 }
 .life .lf-doodles .lf-hand {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    color: var(--rust-text);
     transform: rotate(-2deg);
 }
 .life .lf-bye {
-    font-size: 2.2rem;
+    max-width: none;
+    margin: 0 auto;
+    font:
+        700 clamp(2.4rem, 6vw, 3.4rem) / 1.05 'Caveat',
+        cursive;
+    color: var(--ink);
 }
 .life .lf-back {
     margin: 0.6rem auto;
@@ -503,7 +537,7 @@ html.life-route body {
     }
     .life .lf-stack {
         height: 400px;
-        margin: 2rem 0 3.5rem;
+        margin: 2rem 0 4.5rem;
     }
     .life .lf-clip {
         --collapsed: 560px;
@@ -531,7 +565,7 @@ html.life-route body {
         font-size: 0.72rem;
     }
     .life .lf-arrow {
-        bottom: -48px;
+        bottom: -64px;
         right: 0;
         font-size: 1.25rem;
     }
