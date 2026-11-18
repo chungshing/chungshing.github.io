@@ -6,6 +6,7 @@ import HeroCard from '../../components/HeroCard.jsx';
 import LofiBar from '../../components/LofiBar.jsx';
 import MarginNote from '../../components/MarginNote.jsx';
 import Navbar from '../../components/Navbar.jsx';
+import SiteFooter from '../../components/SiteFooter.jsx';
 import { EDUCATION, EXPERIENCE } from '../../data/journey.js';
 import { PROJECTS } from '../../data/projects.js';
 import { STACK } from '../../data/stack.js';
@@ -279,11 +280,7 @@ export default function Home() {
                 <LofiBar />
             </div>
 
-            <footer className='site-footer mono'>
-                <p className='footer-thanks'>Thanks for reading a page from my notebook.</p>
-                <p className='footer-quote'>build · break · learn · repeat</p>
-                <p className='footer-copyright'>© {new Date().getFullYear()} Chung Shing</p>
-            </footer>
+            <SiteFooter motto='build · break · learn · repeat' />
 
             {videoModal && (
                 <div className='video-modal-backdrop' onClick={() => setVideoModal(null)}>
