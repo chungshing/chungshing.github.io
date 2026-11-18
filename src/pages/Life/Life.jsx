@@ -327,8 +327,8 @@ export default function Life() {
 
             <div className='lf-wrap lf-sec'>
                 <Reveal className='lf-head'>
-                    <h2>Postcards</h2>
-                    <span className='lf-hand'>places I’ve been, and what I ate there</span>
+                    <h2>postcards</h2>
+                    <span className='lf-hand'>proof i touch grass</span>
                 </Reveal>
                 <div
                     ref={clipRef}
@@ -368,7 +368,7 @@ export default function Life() {
 
             <div className='lf-wrap lf-sec'>
                 <Reveal className='lf-head'>
-                    <h2>Everything else</h2>
+                    <h2>analog hours</h2>
                     <span className='lf-hand'>music and coffee</span>
                 </Reveal>
                 <Reveal className='lf-misc'>
@@ -415,7 +415,7 @@ export default function Life() {
                             <path d='M28 18v-6M37 25l9-3M34 36l5 8M22 36l-5 8M19 25l-9-3' />
                         </svg>
                         <span className='lf-hand'>
-                            p.s. of course, football and gaming couldn’t be left out
+                            p.s. when the IDE closes — sports, gaming, and zero tabs open
                         </span>
                         <svg
                             width='64'
