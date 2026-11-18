@@ -118,20 +118,20 @@ export const TRIPS = [
 // Cassette label: keep each line under ~28 characters.
 export const TRACKS = [
     { song: 'Show Me How', artist: 'Men I Trust' },
-    { song: 'Chamber of Reflection', artist: 'Mac DeMarco' },
+    { song: 'K.', artist: 'Cigarettes After Sex' },
     { song: 'No Surprises', artist: 'Radiohead' },
 ];
 
 // Café receipt.
 export const RECEIPT = {
-    cafe: 'CAFÉ NO. 4',
-    table: 'TABLE 2',
+    cafe: 'KISSA CAFÉ',
+    table: 'WINDOW SEAT',
     lines: [
-        ['oat flat white', '1'],
-        ['cheesecake (shared)', '1'],
-        ['3 hours of talking', 'free'],
+        ['iced house latte', '1'],
+        ['tiramisu', '1'],
+        ['going back to 505', 'free'],
     ],
-    total: 'worth it',
+    total: 'on the house',
 };
 
 export const LINKS = {
