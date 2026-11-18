@@ -183,7 +183,7 @@ function Cassette() {
                 fontSize='24'
                 fill='#F5ECD7'
             >
-                Side A — on repeat
+                Side A — late nights
             </text>
             <g fontFamily='Caveat,cursive' fontWeight='700' fontSize='22' fill='#3A2819'>
                 {TRACKS.slice(0, 3).map((t, i) => (
