@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import './life.css';
 import { ASSETS_BASE, HERO, LINKS, RECEIPT, TRACKS, TRIPS } from './content.js';
+import './life.css';
 
 const FONTS =
-    'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;700&family=Schibsted+Grotesk:wght@400;600&display=swap';
+    'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;700&family=Lora:wght@400;500&family=Fira+Code:wght@400;500&display=swap';
 const TONES = [
     ['#C98A4B', '#7C4A22'],
     ['#A3A97C', '#4F5226'],
@@ -12,7 +12,6 @@ const TONES = [
     ['#8A9A5B', '#3F4A22'],
     ['#2F4A5A', '#C98A4B'],
 ];
-const PAGE = 8;
 
 const urlFor = (src) => (!src ? null : /^https?:/.test(src) ? src : ASSETS_BASE + src);
 const tone = (i) => TONES[i % TONES.length];
@@ -31,7 +30,7 @@ function useReveal() {
                     io.disconnect();
                 }
             },
-            { threshold: 0.12 },
+            { threshold: 0.12 }
         );
         io.observe(el);
         return () => io.disconnect();
@@ -67,7 +66,9 @@ function Photo({ item, index, onOpen }) {
                     loading='lazy'
                     decoding='async'
                     onLoad={(e) =>
-                        setNatural(`${e.currentTarget.naturalWidth}/${e.currentTarget.naturalHeight}`)
+                        setNatural(
+                            `${e.currentTarget.naturalWidth}/${e.currentTarget.naturalHeight}`
+                        )
                     }
                 />
             )}
@@ -112,14 +113,22 @@ function Lightbox({ view, onClose, onNav }) {
                         ) : (
                             <div
                                 className='lf-lb-ph'
-                                style={{ aspectRatio: item.crop || item.ratio || '3/4', '--a': a, '--b': b }}
+                                style={{
+                                    aspectRatio: item.crop || item.ratio || '3/4',
+                                    '--a': a,
+                                    '--b': b,
+                                }}
                             />
                         )}
                     </div>
                     <p className='lf-lb-cap'>{label(item)}</p>
                     {view.list.length > 1 && (
                         <div className='lf-lb-nav'>
-                            <button type='button' onClick={() => onNav(-1)} aria-label='Previous photo'>
+                            <button
+                                type='button'
+                                onClick={() => onNav(-1)}
+                                aria-label='Previous photo'
+                            >
                                 ‹
                             </button>
                             <button type='button' onClick={() => onNav(1)} aria-label='Next photo'>
@@ -144,7 +153,16 @@ function Cassette() {
             aria-label='Cassette tape: Side A, on repeat'
             className='lf-cassette'
         >
-            <rect x='4' y='4' width='352' height='222' rx='14' fill='#B8581F' stroke='#3A2819' strokeWidth='3' />
+            <rect
+                x='4'
+                y='4'
+                width='352'
+                height='222'
+                rx='14'
+                fill='#B8581F'
+                stroke='#3A2819'
+                strokeWidth='3'
+            />
             <g fill='#3A2819'>
                 <circle cx='18' cy='18' r='5' />
                 <circle cx='342' cy='18' r='5' />
@@ -163,7 +181,13 @@ function Cassette() {
                     </text>
                 ))}
             </g>
-            <path d='M250 100q30-14 62 0' stroke='#B8581F' strokeWidth='3' fill='none' strokeLinecap='round' />
+            <path
+                d='M250 100q30-14 62 0'
+                stroke='#B8581F'
+                strokeWidth='3'
+                fill='none'
+                strokeLinecap='round'
+            />
             <rect x='84' y='142' width='192' height='50' rx='25' fill='#2E2218' />
             <path d='M128 152h104M128 176h104' stroke='#8A6A3E' strokeWidth='2' />
             <g fill='#F5ECD7' stroke='#F5ECD7' strokeWidth='2' strokeLinecap='round'>
@@ -197,7 +221,10 @@ const doodle = {
 };
 
 export default function Life() {
-    const [shown, setShown] = useState(PAGE);
+    const [expanded, setExpanded] = useState(false);
+    const [overflowing, setOverflowing] = useState(false);
+    const clipRef = useRef(null);
+    const logRef = useRef(null);
     const [view, setView] = useState(null);
     const heroRef = useReveal();
 
@@ -220,11 +247,25 @@ export default function Life() {
         };
     }, []);
 
+    useEffect(() => {
+        const inner = logRef.current;
+        const clip = clipRef.current;
+        if (!inner || !clip || expanded) return;
+        const check = () => setOverflowing(clip.scrollHeight > clip.clientHeight + 8);
+        check();
+        const ro = new ResizeObserver(check);
+        ro.observe(inner);
+        window.addEventListener('resize', check);
+        return () => {
+            ro.disconnect();
+            window.removeEventListener('resize', check);
+        };
+    }, [expanded]);
+
     const open = (list, i) => setView({ list, i });
     const nav = useCallback(
-        (d) =>
-            setView((v) => (v ? { ...v, i: (v.i + d + v.list.length) % v.list.length } : v)),
-        [],
+        (d) => setView((v) => (v ? { ...v, i: (v.i + d + v.list.length) % v.list.length } : v)),
+        []
     );
     const close = useCallback(() => setView(null), []);
     const rot = [-2, 1.5, -1, 2.5];
@@ -240,9 +281,9 @@ export default function Life() {
                         the <i>screen</i>
                     </h1>
                     <p>
-                        A little corner for the places I’ve been, things I’ve enjoyed and moments worth
-                        keeping. Some travel memories, a bit of music, good coffee and whatever else
-                        finds its way here. Pull up a chair.
+                        A little corner for the places I’ve been, things I’ve enjoyed and moments
+                        worth keeping. Some travel memories, a bit of music, good coffee and
+                        whatever else finds its way here. Pull up a chair.
                     </p>
                 </div>
                 <div className='lf-stack'>
@@ -262,31 +303,36 @@ export default function Life() {
                     <h2>Postcards</h2>
                     <span className='lf-hand'>places I’ve been, and what I ate there</span>
                 </Reveal>
-                <div className='lf-log'>
-                    {TRIPS.slice(0, shown).map((t, i) => (
-                        <figure
-                            key={`${t.src}-${i}`}
-                            className='lf-pol'
-                            style={{ '--rot': `${rot[i % 4]}deg` }}
-                        >
-                            <span className='lf-meta'>
-                                {t.place} · {t.date}
-                            </span>
-                            {t.stamp && (
-                                <span className='lf-stampc'>
-                                    {t.stamp}
-                                    <br />
-                                    {t.date.slice(-4)}
+                <div
+                    ref={clipRef}
+                    className={`lf-clip ${expanded ? '' : 'is-collapsed'} ${overflowing && !expanded ? 'is-clipped' : ''}`}
+                >
+                    <div ref={logRef} className='lf-log'>
+                        {TRIPS.map((t, i) => (
+                            <figure
+                                key={`${t.src}-${i}`}
+                                className='lf-pol'
+                                style={{ '--rot': `${rot[i % 4]}deg` }}
+                            >
+                                <span className='lf-meta'>
+                                    {t.place} · {t.date}
                                 </span>
-                            )}
-                            <Photo item={t} index={i} onOpen={() => open(TRIPS, i)} />
-                            <figcaption>{t.cap}</figcaption>
-                        </figure>
-                    ))}
+                                {t.stamp && (
+                                    <span className='lf-stampc'>
+                                        {t.stamp}
+                                        <br />
+                                        {t.date.slice(-4)}
+                                    </span>
+                                )}
+                                <Photo item={t} index={i} onOpen={() => open(TRIPS, i)} />
+                                <figcaption>{t.cap}</figcaption>
+                            </figure>
+                        ))}
+                    </div>
                 </div>
-                {shown < TRIPS.length && (
+                {overflowing && !expanded && (
                     <p className='lf-morewrap'>
-                        <button type='button' className='lf-more' onClick={() => setShown((s) => s + PAGE)}>
+                        <button type='button' className='lf-more' onClick={() => setExpanded(true)}>
                             more from the roll
                         </button>
                     </p>
@@ -326,13 +372,27 @@ export default function Life() {
             <footer className='lf-foot'>
                 <Reveal>
                     <div className='lf-doodles'>
-                        <svg width='54' height='54' viewBox='0 0 56 56' {...doodle} aria-hidden='true'>
+                        <svg
+                            width='54'
+                            height='54'
+                            viewBox='0 0 56 56'
+                            {...doodle}
+                            aria-hidden='true'
+                        >
                             <circle cx='28' cy='28' r='22' />
                             <path d='M28 18l9 7-3 11H22l-3-11z' />
                             <path d='M28 18v-6M37 25l9-3M34 36l5 8M22 36l-5 8M19 25l-9-3' />
                         </svg>
-                        <span className='lf-hand'>p.s. of course, football and gaming couldn’t be left out</span>
-                        <svg width='64' height='44' viewBox='0 0 72 48' {...doodle} aria-hidden='true'>
+                        <span className='lf-hand'>
+                            p.s. of course, football and gaming couldn’t be left out
+                        </span>
+                        <svg
+                            width='64'
+                            height='44'
+                            viewBox='0 0 72 48'
+                            {...doodle}
+                            aria-hidden='true'
+                        >
                             <path d='M14 8h44c8 0 12 14 12 24 0 5-4 7-8 4l-8-8H18l-8 8c-4 3-8 1-8-4 0-10 4-24 12-24z' />
                             <path d='M20 16v8M16 20h8' />
                             <circle cx='50' cy='17' r='2' />
