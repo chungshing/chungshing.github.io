@@ -4,6 +4,13 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Page Not Found | Portfolio</title>
+        <script>
+            // /life is a client-side route: send it back to the app instead of showing the 404.
+            if (/^\/life\/?$/.test(location.pathname)) {
+                sessionStorage.setItem('spa-redirect', '/life');
+                location.replace('/');
+            }
+        </script>
         <style>
             body {
                 font-family:
