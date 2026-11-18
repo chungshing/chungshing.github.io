@@ -8,4 +8,4 @@ npm run build
 npm run deploy         # uses gh-pages, pushes dist/ to gh-pages branch
 # then in repo settings -> Pages -> source: gh-pages branch
 
-Fill in: App.jsx (PROJECTS, STACK, bio paragraph, email/links already set from your README)
+Fill in: src/data/ (projects.js, stack.js, journey.js), src/pages/Home/Home.jsx (bio paragraph), src/pages/Life/content.js (/life photos + text)
