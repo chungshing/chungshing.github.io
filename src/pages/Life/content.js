@@ -117,9 +117,9 @@ export const TRIPS = [
 ];
 // Cassette label: keep each line under ~28 characters.
 export const TRACKS = [
-    { song: 'song', artist: 'artist' },
-    { song: 'song', artist: 'artist' },
-    { song: 'song', artist: 'artist' },
+    { song: 'Show Me How', artist: 'Men I Trust' },
+    { song: 'Chamber of Reflection', artist: 'Mac DeMarco' },
+    { song: 'No Surprises', artist: 'Radiohead' },
 ];
 
 // Café receipt.
