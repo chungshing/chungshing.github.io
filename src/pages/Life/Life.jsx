@@ -1,6 +1,7 @@
 import { PiixPal } from 'piixpal/react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import SiteFooter from '../../components/SiteFooter.jsx';
+import { Link } from '../../lib/router.jsx';
 import { ASSETS_BASE, HERO, LINKS, RECEIPT, TRACKS, TRIPS } from './content.js';
 import './life.css';
 
@@ -254,7 +255,7 @@ export default function Life() {
     const [view, setView] = useState(null);
     const heroRef = useReveal();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const html = document.documentElement;
         const prevTitle = document.title;
         html.classList.add('life-route');
@@ -470,7 +471,8 @@ export default function Life() {
                         </svg>
                     </div>
                     <p className='lf-back'>
-                        back to the <a href={LINKS.portfolio}>night desk (portfolio)</a> · say hi on{' '}
+                        back to the <Link to={LINKS.portfolio}>night desk (portfolio)</Link> · say
+                        hi on{' '}
                         <a href={LINKS.linkedin} target='_blank' rel='noopener noreferrer'>
                             LinkedIn
                         </a>

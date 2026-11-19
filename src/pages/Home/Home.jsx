@@ -1,15 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-import './home.css';
 import CoderCard from '../../components/CoderCard.jsx';
 import ContactForm from '../../components/ContactForm.jsx';
 import HeroCard from '../../components/HeroCard.jsx';
-import LofiBar from '../../components/LofiBar.jsx';
 import MarginNote from '../../components/MarginNote.jsx';
 import Navbar from '../../components/Navbar.jsx';
 import SiteFooter from '../../components/SiteFooter.jsx';
 import { EDUCATION, EXPERIENCE } from '../../data/journey.js';
 import { PROJECTS } from '../../data/projects.js';
 import { STACK } from '../../data/stack.js';
+import './home.css';
 
 export default function Home() {
     const contentRef = useRef(null);
@@ -276,8 +275,6 @@ export default function Home() {
                 <aside className='nav-col'>
                     <Navbar scrollRef={contentRef} />
                 </aside>
-
-                <LofiBar />
             </div>
 
             <SiteFooter motto='build · break · learn · repeat' />
