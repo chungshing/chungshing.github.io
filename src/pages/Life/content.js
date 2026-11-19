@@ -56,7 +56,6 @@ export const TRIPS = [
         place: 'Hiroshima',
         date: 'May 2026',
         cap: 'gate in the ocean, no big deal',
-        stamp: 'JP',
         ratio: '9/16',
     },
     {
@@ -102,6 +101,7 @@ export const TRIPS = [
         place: 'Kyoto',
         date: 'Apr 2025',
         cap: 'main character sky',
+        stamp: 'JP',
     },
 
     // August 2022
