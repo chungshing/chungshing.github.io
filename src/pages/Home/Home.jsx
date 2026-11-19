@@ -66,19 +66,18 @@ export default function Home() {
                             <h2>About Me</h2>
                             <p className='subtitle'>Mostly curious. Occasionally caffeinated.</p>
                             <div className='card'>
-                                <p style={{ marginTop: 0 }}>
+                                <p style={{ marginTop: 0, marginBottom: '1.5rem' }}>
                                     I've always enjoyed figuring out how things work, especially the
-                                    bits happening behind the screen. Somewhere along the way, that
-                                    curiosity turned into an interest in backend development,
-                                    full-stack applications, and building things that solve everyday
-                                    problems.
+                                    bits happening behind the screen. That curiosity turned into an
+                                    interest in backend development, full-stack applications, and
+                                    building things that solve everyday problems.
                                 </p>
-                                <p style={{ marginBottom: 0 }}>
+                                <p style={{ marginTop: 0, marginBottom: '1.5rem' }}>
                                     Most of my projects start with a random idea or something I want
-                                    to figure out. Sometimes it's an API, sometimes a workflow that
-                                    could be a little smoother, or just something I thought would be
-                                    fun to build. A lot of learning happens along the way, and
-                                    that's probably my favourite part of it.
+                                    to figure out. Sometimes it's an API, a workflow that could be a
+                                    little smoother, or just something I thought would be fun to
+                                    build. A lot of learning happens along the way, and that's
+                                    probably my favourite part of it.
                                 </p>
                                 <p style={{ marginBottom: 0 }}>
                                     Outside of that, I'm usually following some kind of sport,
