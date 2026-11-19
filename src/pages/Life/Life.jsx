@@ -71,7 +71,7 @@ function Reveal({ className = '', children }) {
     );
 }
 
-function Photo({ item, index, onOpen }) {
+function Photo({ item, index, onOpen, eager = false }) {
     const [natural, setNatural] = useState(null);
     const url = urlFor(item.src);
     const [a, b] = tone(index);
@@ -87,7 +87,7 @@ function Photo({ item, index, onOpen }) {
                 <img
                     src={url}
                     alt={item.alt || item.cap}
-                    loading='lazy'
+                    loading={eager ? 'eager' : 'lazy'}
                     decoding='async'
                     onLoad={(e) =>
                         setNatural(
@@ -353,7 +353,7 @@ export default function Life() {
                     {HERO.slice(0, 3).map((h, i) => (
                         <figure key={i} className={`lf-pol lf-p${i + 1}`}>
                             {i === 0 && <span className='lf-tape' />}
-                            <Photo item={h} index={i} onOpen={() => open(HERO, i)} />
+                            <Photo item={h} index={i} onOpen={() => open(HERO, i)} eager />
                             <figcaption>{h.cap}</figcaption>
                         </figure>
                     ))}
