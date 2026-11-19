@@ -406,6 +406,10 @@ html.life-route body {
         5% 100%,
         0 97%
     );
+    transition: transform 0.35s ease;
+}
+.life .lf-rcpt:hover {
+    transform: rotate(-1.5deg) translateY(-5px);
 }
 .life .lf-rcpt > div {
     display: flex;
@@ -539,7 +543,8 @@ html.life-route body {
     }
     .life .lf-pol,
     .life .lf-more,
-    .life .lf-reel {
+    .life .lf-reel,
+    .life .lf-rcpt {
         transition: none;
     }
 }
