@@ -751,35 +751,6 @@ section h2 {
     transform: scaleX(1);
 }
 
-.site-footer {
-    flex-shrink: 0;
-    text-align: center;
-    padding: 10px 0;
-    border-top: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.footer-thanks {
-    font-family: var(--font-body);
-    font-size: 0.72rem;
-    color: var(--text-faint);
-    margin: 0;
-}
-
-.footer-quote {
-    font-size: 0.68rem;
-    color: var(--text-faint);
-    margin: 0;
-}
-
-.footer-copyright {
-    font-size: 0.66rem;
-    color: var(--text-faint);
-    margin: 0;
-}
-
 .margin-note {
     margin-top: 20px;
     margin-left: 12px;

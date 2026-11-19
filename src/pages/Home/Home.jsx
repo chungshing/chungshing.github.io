@@ -1,199 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import './App.css';
-import CoderCard from './CoderCard.jsx';
-import ContactForm from './ContactForm.jsx';
-import HeroCard from './HeroCard.jsx';
-import LofiBar from './LofiBar.jsx';
-import MarginNote from './MarginNote.jsx';
-import Navbar from './Navbar.jsx';
+import CoderCard from '../../components/CoderCard.jsx';
+import ContactForm from '../../components/ContactForm.jsx';
+import HeroCard from '../../components/HeroCard.jsx';
+import MarginNote from '../../components/MarginNote.jsx';
+import Navbar from '../../components/Navbar.jsx';
+import SiteFooter from '../../components/SiteFooter.jsx';
+import { EDUCATION, EXPERIENCE } from '../../data/journey.js';
+import { PROJECTS } from '../../data/projects.js';
+import { STACK } from '../../data/stack.js';
+import './home.css';
 
-const PROJECTS = [
-    {
-        title: 'F1 Race Intelligence Dashboard',
-        description:
-            'Started as a way to combine my interest in Formula 1 with learning full-stack development. It now ingests race data, processes it, and surfaces strategy insights through an interactive dashboard.',
-        note: '✦ Running live with automated race data updates.',
-        stack: ['Spring Boot', 'Next.js', 'PostgreSQL', 'REST API'],
-        links: [
-            {
-                type: 'demo',
-                label: 'Live Demo',
-                url: 'https://f1-race-intelligence-dashboard.vercel.app',
-            },
-            {
-                type: 'github',
-                label: 'GitHub',
-                url: 'https://github.com/chungshing/f1-race-intelligence-dashboard',
-            },
-        ],
-    },
-    {
-        title: 'Golf Swing AI Analysis',
-        description:
-            'What if a golf swing could be broken down frame by frame and explained like a coach would? This project explores that idea using computer vision and machine learning to turn swing videos into actionable feedback.',
-        note: '✦ Built alongside an industry partner through SIT. Code private due to NDA.',
-        stack: [
-            'Python',
-            'Computer Vision',
-            'TensorFlow',
-            'MediaPipe',
-            'OpenCV',
-            'Flask',
-            'MongoDB',
-            'Google Cloud',
-        ],
-        links: [
-            {
-                type: 'video',
-                label: 'Watch Video',
-                url: 'https://chungshing.github.io/portfolio-assets/video/golf.mp4',
-            },
-        ],
-    },
-    {
-        title: 'Hospitality Booking Platform',
-        description:
-            'A project that got me exploring how all the pieces of a booking system fit together, from checking room availability to handling reservations and connecting everything through one application.',
-        note: '✦ Exploring SQL and NoSQL in one booking platform.',
-        stack: ['Node.js', 'EJS', 'MySQL', 'MongoDB'],
-        links: [
-            {
-                type: 'screenshots',
-                label: 'View Screenshots',
-                images: [
-                    {
-                        url: 'https://chungshing.github.io/portfolio-assets/image/archDiagram.png',
-                        alt: 'System architecture diagram for the Hospitality Booking Platform',
-                    },
-                    {
-                        url: 'https://chungshing.github.io/portfolio-assets/image/webpage1.png',
-                        alt: 'Hostel landing page screenshot',
-                    },
-                    {
-                        url: 'https://chungshing.github.io/portfolio-assets/image/webpage2.png',
-                        alt: 'Hostel listing page screenshot',
-                    },
-                    {
-                        url: 'https://chungshing.github.io/portfolio-assets/image/webpage3.png',
-                        alt: 'Hostel detail page screenshot',
-                    },
-                    {
-                        url: 'https://chungshing.github.io/portfolio-assets/image/webpage4.png',
-                        alt: 'Hostel detail page screenshot, scrolled down',
-                    },
-                    {
-                        url: 'https://chungshing.github.io/portfolio-assets/image/webpage5.png',
-                        alt: 'Hostel detail page screenshot, scrolled down further',
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        title: 'Yelp Big Data Pipeline',
-        description:
-            'A chance to play around with big data and see what happens when datasets get too large for a regular application. I used Hadoop and Spark to process the Yelp Open Dataset and explore the insights hidden in it.',
-        note: '✦ From raw JSON to distributed processing and data-driven insights.',
-        stack: ['Java', 'Hadoop', 'HDFS', 'Spark', 'Python', 'Data Visualization'],
-        links: [
-            {
-                type: 'github',
-                label: 'View Analysis',
-                url: 'https://github.com/chungshing/yelp-data-pipeline/blob/main/Part%205%20Data%20Visualization/yelp_data_analysis.ipynb',
-            },
-            {
-                type: 'github',
-                label: 'GitHub',
-                url: 'https://github.com/chungshing/yelp-data-pipeline',
-            },
-        ],
-    },
-];
-
-const STACK = {
-    Frontend: [
-        { name: 'React', icon: 'devicon-react-original colored' },
-        { name: 'Next.js', icon: 'devicon-nextjs-plain' },
-        { name: 'JavaScript', icon: 'devicon-javascript-plain colored' },
-        { name: 'HTML5', icon: 'devicon-html5-plain colored' },
-        { name: 'CSS3', icon: 'devicon-css3-plain colored' },
-    ],
-    Backend: [
-        { name: 'Java', icon: 'devicon-java-plain colored' },
-        { name: 'Spring', icon: 'devicon-spring-plain colored' },
-        { name: 'Python', icon: 'devicon-python-plain colored' },
-        { name: 'Node.js', icon: 'devicon-nodejs-plain colored' },
-        { name: 'PHP', icon: 'devicon-php-plain colored' },
-    ],
-    Data: [
-        { name: 'PostgreSQL', icon: 'devicon-postgresql-plain colored' },
-        { name: 'MySQL', icon: 'devicon-mysql-original colored' },
-        { name: 'MongoDB', icon: 'devicon-mongodb-plain colored' },
-    ],
-    Workflow: [
-        { name: 'Git', icon: 'devicon-git-plain colored' },
-        { name: 'SVN', icon: 'devicon-subversion-original colored' },
-        { name: 'Docker', icon: 'devicon-docker-plain colored' },
-        { name: 'Postman', icon: 'devicon-postman-plain colored' },
-    ],
-};
-
-const EXPERIENCE = [
-    {
-        role: 'MES Software Engineer',
-        company: 'STMicroelectronics',
-        type: 'Internship',
-        location: 'Singapore',
-        mode: 'Hybrid',
-        period: 'May 2025 — Apr 2026',
-        description:
-            'A year of getting familiar with semiconductor workflows and finding ways to make everyday processes a little less manual.',
-        highlights: [
-            'Helped move 4 out of 5 manual approval steps into the existing MES workflow, saving around 8 hours of manual work each week.',
-            'Extended the MES application with Java and JavaScript, adding workflow support for different manufacturing operations.',
-            'Worked on features from start to finish, from gathering requirements with process engineers to testing and deploying the changes.',
-        ],
-    },
-    {
-        role: 'Software Developer / Tester',
-        company: 'NCS Pte Ltd',
-        type: 'Internship',
-        location: 'Singapore',
-        mode: 'On-site',
-        period: 'Aug 2019 — Feb 2020',
-        description:
-            'Where I first got my hands dirty with real-world software development, from building APIs to testing features and chasing down bugs.',
-        highlights: [
-            'Spent time building Java APIs and figuring out how the backend connects with the rest of the application.',
-            'Got involved in the frontend too, working with HTML and JavaScript on the AGC Intelligent Workspace.',
-            'Put new features through their paces with 80+ test cases, catching bugs along the way.',
-        ],
-    },
-];
-
-const EDUCATION = [
-    {
-        role: 'Bachelor of Engineering with Honours in ICT (Software Engineering)',
-        org: 'Singapore Institute of Technology • Singapore',
-        period: '2022 — 2026',
-        description:
-            'Four years of lectures, group projects, late-night coding, and figuring things out along the way. Somewhere in between, I even ended up co-authoring a research paper on vishing attacks.',
-        link: {
-            label: 'Read →',
-            title: '✦ Published at IEEE SOLI 2023 • Detecting Vishing Attacks...',
-            href: 'https://ieeexplore.ieee.org/document/10425272',
-        },
-    },
-    {
-        role: 'Diploma in Multimedia & Infocomm Technology',
-        org: 'Nanyang Polytechnic • Singapore',
-        period: '2019 — 2022',
-        description:
-            'This was where I started getting into programming, building web applications, working with databases, and discovering that I actually enjoyed making things with code.',
-    },
-];
-
-export default function App() {
+export default function Home() {
     const contentRef = useRef(null);
     const [journeyTab, setJourneyTab] = useState('experience');
     const [videoModal, setVideoModal] = useState(null);
@@ -458,15 +275,9 @@ export default function App() {
                 <aside className='nav-col'>
                     <Navbar scrollRef={contentRef} />
                 </aside>
-
-                <LofiBar />
             </div>
 
-            <footer className='site-footer mono'>
-                <p className='footer-thanks'>Thanks for reading a page from my notebook.</p>
-                <p className='footer-quote'>build · break · learn · repeat</p>
-                <p className='footer-copyright'>© {new Date().getFullYear()} Chung Shing</p>
-            </footer>
+            <SiteFooter motto='build · break · learn · repeat' />
 
             {videoModal && (
                 <div className='video-modal-backdrop' onClick={() => setVideoModal(null)}>

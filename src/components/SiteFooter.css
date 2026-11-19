@@ -1,0 +1,42 @@
+/* Shared footer. Pages theme it with --sf-border, --sf-text and --sf-bg. */
+/* footer.site-footer outranks any leftover .site-footer rule elsewhere (e.g. an old padding in home.css) */
+footer.site-footer {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    flex-shrink: 0;
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid var(--sf-border, var(--border));
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+footer.site-footer--fixed {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    background: var(--sf-bg, var(--bg));
+}
+/* two-class selectors so page-level paragraph rules (e.g. .life p) can't override them */
+.site-footer .footer-thanks,
+.site-footer .footer-quote,
+.site-footer .footer-copyright {
+    margin: 0;
+    max-width: none;
+    line-height: 1.75;
+    color: var(--sf-text, var(--text-faint));
+}
+.site-footer .footer-thanks {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+}
+.site-footer .footer-quote {
+    font-size: 0.68rem;
+}
+.site-footer .footer-copyright {
+    font-size: 0.66rem;
+}

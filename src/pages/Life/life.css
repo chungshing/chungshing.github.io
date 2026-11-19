@@ -1,0 +1,584 @@
+/* /life — everything is scoped under .life (or html.life-route) so the homepage is untouched. */
+html.life-route {
+    color-scheme: light;
+    /* page still scrolls, but no scrollbar takes width: content centres on the full window, like the portfolio */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+html.life-route::-webkit-scrollbar,
+html.life-route body::-webkit-scrollbar {
+    display: none;
+    width: 0;
+}
+html.life-route,
+html.life-route body,
+html.life-route #root {
+    height: auto;
+    overflow: visible;
+}
+html.life-route body {
+    background: #e9ddc3;
+    background-image: none;
+}
+
+.life {
+    --bg: #e9ddc3;
+    --paper: #f5ecd7;
+    --ink: #3a2819;
+    --soft: #6f5a45;
+    --rust: #c25e1b;
+    --sf-border: var(--tan);
+    --sf-text: var(--soft);
+    --sf-bg: var(--bg);
+    --rust-text: #9a4513;
+    --rule: rgba(58, 40, 25, 0.08);
+    --olive: #66652f;
+    --tan: #c9a57a;
+    --shadow: rgba(58, 40, 25, 0.28);
+    min-height: 100vh;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+    background-color: var(--bg);
+    background-image:
+        repeating-linear-gradient(transparent 0 31px, var(--rule) 31px 32px),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .2 0 0 0 0 .1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+    color: var(--ink);
+    font:
+        400 1.05rem/1.7 'Lora',
+        Georgia,
+        serif;
+    overflow-x: hidden;
+}
+.life *,
+.life *::before,
+.life *::after {
+    box-sizing: border-box;
+}
+.life h1,
+.life h2 {
+    margin: 0;
+    color: var(--ink);
+}
+/* same display fonts as the portfolio: Caveat for the big title, Fira Code for section headings */
+.life h1 {
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: clamp(4.4rem, 14vw, 9.5rem);
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+}
+.life h1 i {
+    font-style: normal;
+    color: var(--olive);
+}
+.life h2 {
+    font-family: 'Fira Code', ui-monospace, monospace;
+    font-weight: 500;
+    font-size: clamp(1.7rem, 4vw, 2.3rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+}
+.life p {
+    color: var(--ink);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin: 0.6rem 0;
+    max-width: 46ch;
+}
+.life a {
+    color: inherit;
+}
+.life figure {
+    margin: 0;
+}
+.life .lf-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+.life .lf-hand {
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    color: var(--rust);
+    line-height: 1.1;
+}
+.life .lf-head .lf-hand {
+    font-size: 1.55rem;
+    color: var(--rust-text);
+}
+.life .lf-sec {
+    padding: 4rem 1.25rem;
+}
+.life .lf-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* photos + polaroids */
+.life .lf-ph {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    cursor: zoom-in;
+    background: linear-gradient(160deg, var(--a), var(--b));
+}
+.life .lf-ph img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.life .lf-ph:focus-visible,
+.life .lf-more:focus-visible,
+.life .lf-lb button:focus-visible {
+    outline: 3px solid var(--rust);
+    outline-offset: 3px;
+}
+.life .lf-pol {
+    position: relative;
+    background: #fbf5e6;
+    color: #3a2819;
+    padding: 0.6rem 0.6rem 2.6rem;
+    box-shadow: 0 10px 22px var(--shadow);
+    transform: rotate(var(--rot, 0deg));
+    transition: transform 0.35s ease;
+}
+.life .lf-pol:hover {
+    transform: rotate(0) translateY(-6px) scale(1.02);
+    z-index: 5;
+}
+.life .lf-pol figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.55rem;
+    padding: 0 0.5rem;
+    text-align: center;
+    font:
+        700 1.25rem/1.1 'Caveat',
+        cursive;
+}
+.life .lf-tape {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    width: 84px;
+    height: 26px;
+    margin-left: -42px;
+    background: #f4bb3daa;
+    transform: rotate(-4deg);
+    z-index: 2;
+}
+
+.life .lf-daynote {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    max-width: 40ch;
+    margin-top: 1.3rem;
+    color: var(--rust-text);
+}
+.life .lf-daynote svg {
+    flex: none;
+}
+.life .lf-daynote .lf-hand {
+    font-size: 1.35rem;
+    color: var(--rust-text);
+    transform: rotate(-1deg);
+}
+
+/* hero */
+.life .lf-hero {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 2rem;
+    align-items: center;
+    padding-top: 4.5rem;
+    padding-bottom: 3rem;
+}
+.life .lf-note {
+    display: inline-block;
+    transform: rotate(-3deg);
+    font-size: 1.7rem;
+    margin-bottom: 0.4rem;
+}
+.life .lf-stack {
+    position: relative;
+    height: 470px;
+    margin-bottom: 2.5rem;
+}
+.life .lf-stack .lf-pol {
+    position: absolute;
+    width: 55%;
+}
+.life .lf-p1 {
+    left: 0;
+    top: 30px;
+    --rot: -6deg;
+}
+.life .lf-p2 {
+    right: 0;
+    top: 0;
+    --rot: 5deg;
+}
+.life .lf-p3 {
+    left: 22%;
+    top: 170px;
+    --rot: -2deg;
+    width: 58% !important;
+}
+.life .lf-arrow {
+    position: absolute;
+    right: 4%;
+    bottom: -66px;
+    font-size: 1.5rem;
+    transform: rotate(8deg);
+}
+
+/* postcards: pinterest-style masonry, ~2 rows until "more from the roll" */
+.life .lf-clip {
+    --collapsed: clamp(520px, 78vw, 960px);
+    position: relative;
+    margin: 0 -1rem;
+    padding: 0.8rem 1rem 0;
+}
+.life .lf-clip.is-collapsed {
+    max-height: var(--collapsed);
+    overflow: hidden;
+}
+.life .lf-clip.is-clipped::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 110px;
+    background: linear-gradient(transparent, var(--bg));
+    pointer-events: none;
+}
+.life .lf-log {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.3rem;
+}
+.life .lf-col {
+    flex: 1;
+    min-width: 0;
+}
+.life .lf-log .lf-pol {
+    margin-bottom: 1.6rem;
+    width: 100%;
+}
+.life .lf-meta {
+    position: absolute;
+    left: 0.7rem;
+    top: 0.7rem;
+    z-index: 2;
+    background: #fbf5e6;
+    color: #3a2819;
+    font:
+        500 0.68rem 'Fira Code',
+        ui-monospace,
+        monospace;
+    padding: 0.05rem 0.4rem;
+    transform: rotate(-2deg);
+}
+.life .lf-stampc {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    z-index: 3;
+    width: 48px;
+    height: 56px;
+    border: 2px dashed var(--rust);
+    background: #fbf5e6e6;
+    color: var(--rust);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font:
+        700 0.85rem/1 'Caveat',
+        cursive;
+    transform: rotate(6deg);
+}
+.life .lf-morewrap {
+    text-align: center;
+    max-width: none;
+    margin-top: 1rem;
+}
+.life .lf-more {
+    font:
+        700 1.5rem 'Caveat',
+        cursive;
+    color: #3a2819;
+    background: #fbf5e6;
+    border: 2px dashed var(--rust);
+    padding: 0.4rem 1.4rem;
+    cursor: pointer;
+    transform: rotate(-1.5deg);
+    transition: transform 0.25s;
+}
+.life .lf-more:hover {
+    transform: rotate(0);
+}
+
+/* everything else: cassette + receipt */
+.life [data-piixpal] {
+    filter: drop-shadow(0 1px 0 rgba(58, 40, 25, 0.25));
+}
+.life .lf-misc {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.4rem;
+    align-items: stretch;
+}
+.life .lf-tapec {
+    grid-column: 1 / 7;
+    display: flex;
+    align-items: center;
+    transform: rotate(-1.5deg);
+    filter: drop-shadow(0 12px 14px var(--shadow));
+}
+.life .lf-cassette {
+    width: 100%;
+    display: block;
+}
+.life .lf-reel {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 1.4s ease;
+}
+.life .lf-tapec:hover .lf-reel {
+    transform: rotate(240deg);
+}
+.life .lf-rcpt {
+    grid-column: 7 / 13;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
+    color: #222;
+    font:
+        1rem/1.5 'Fira Code',
+        ui-monospace,
+        monospace;
+    padding: 1.1rem 1.1rem 1.6rem;
+    transform: rotate(-1.5deg);
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 97%,
+        95% 100%,
+        90% 97%,
+        85% 100%,
+        80% 97%,
+        75% 100%,
+        70% 97%,
+        65% 100%,
+        60% 97%,
+        55% 100%,
+        50% 97%,
+        45% 100%,
+        40% 97%,
+        35% 100%,
+        30% 97%,
+        25% 100%,
+        20% 97%,
+        15% 100%,
+        10% 97%,
+        5% 100%,
+        0 97%
+    );
+}
+.life .lf-rcpt > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.life .lf-rcpt hr {
+    border: 0;
+    border-top: 2px dashed #bbb;
+    margin: 0.5rem 0;
+}
+
+/* footer */
+.life .lf-foot {
+    text-align: center;
+    padding: 3rem 1.25rem 5rem;
+}
+.life .lf-doodles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.8rem 0 1.4rem;
+    color: var(--rust);
+}
+.life .lf-doodles .lf-hand {
+    font-size: 1.3rem;
+    color: var(--rust-text);
+    transform: rotate(-2deg);
+}
+.life .lf-bye {
+    max-width: none;
+    margin: 0 auto;
+    font:
+        700 clamp(2.4rem, 6vw, 3.4rem) / 1.05 'Caveat',
+        cursive;
+    color: var(--ink);
+}
+.life .lf-back {
+    margin: 0.6rem auto;
+    color: var(--soft);
+}
+
+/* reveal */
+.life .lf-rv {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+}
+.life .lf-rv.in {
+    opacity: 1;
+    transform: none;
+}
+
+/* lightbox */
+.life .lf-lb {
+    position: fixed;
+    border: 0;
+    padding: 1rem 1rem 3.4rem;
+    background: #fbf5e6;
+    color: #3a2819;
+    width: min(92vw, 640px);
+    max-height: 92vh;
+    box-shadow: 0 30px 80px #000a;
+    overflow: visible;
+}
+.life .lf-lb::backdrop {
+    background: #1d140cd0;
+}
+.life .lf-lb-stage {
+    display: flex;
+    justify-content: center;
+}
+.life .lf-lb-stage img {
+    display: block;
+    max-width: 100%;
+    max-height: 70vh;
+}
+.life .lf-lb-ph {
+    height: min(60vh, 520px);
+    max-width: 100%;
+    background: linear-gradient(160deg, var(--a), var(--b));
+}
+.life .lf-lb-cap {
+    position: absolute;
+    left: 3rem;
+    right: 3rem;
+    bottom: 0.7rem;
+    margin: 0;
+    max-width: none;
+    text-align: center;
+    color: #3a2819;
+    font:
+        700 1.4rem/1.1 'Caveat',
+        cursive;
+}
+.life .lf-lb-nav button,
+.life .lf-lb-x {
+    position: absolute;
+    border: 0;
+    background: #3a2819;
+    color: #f5ecd7;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+}
+.life .lf-lb-nav button:first-child {
+    left: 0.5rem;
+    bottom: 0.4rem;
+}
+.life .lf-lb-nav button:last-child {
+    right: 0.5rem;
+    bottom: 0.4rem;
+}
+.life .lf-lb-x {
+    top: -1rem;
+    right: -1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .life .lf-rv {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    .life .lf-pol,
+    .life .lf-more,
+    .life .lf-reel {
+        transition: none;
+    }
+}
+
+@media (max-width: 760px) {
+    .life .lf-hero {
+        display: block;
+        padding-top: 3rem;
+    }
+    .life .lf-stack {
+        height: 400px;
+        margin: 2rem 0 4.5rem;
+    }
+    .life .lf-clip {
+        --collapsed: 560px;
+    }
+    .life .lf-log {
+        gap: 0.9rem;
+    }
+    .life .lf-log .lf-pol {
+        padding: 0.4rem 0.4rem 2.2rem;
+    }
+    .life .lf-log .lf-pol figcaption {
+        font-size: 1.05rem;
+    }
+    .life .lf-meta {
+        font-size: 0.8rem;
+        max-width: calc(100% - 3.6rem);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .life .lf-stampc {
+        width: 38px;
+        height: 46px;
+        font-size: 0.72rem;
+    }
+    .life .lf-arrow {
+        bottom: -64px;
+        right: 0;
+        font-size: 1.25rem;
+    }
+    .life .lf-misc {
+        display: block;
+    }
+    .life .lf-tapec {
+        margin-bottom: 1.6rem;
+    }
+    .life .lf-rcpt {
+        padding-top: 1.6rem;
+    }
+}
