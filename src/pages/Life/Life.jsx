@@ -322,166 +322,184 @@ export default function Life() {
 
     return (
         <div className='life'>
-            <header className='lf-wrap lf-hero'>
-                <div ref={heroRef} className='lf-rv'>
-                    <span className='lf-hand lf-note'>hi, you made it past the résumé :)</span>
-                    <h1>
-                        outside
-                        <br />
-                        the <i>screen</i>
-                    </h1>
-                    <p>
-                        A little corner for the places I’ve been, things I’ve enjoyed and moments
-                        worth keeping. Some travel memories, a bit of music, good coffee and
-                        whatever else finds its way here. Pull up a chair.
-                    </p>
-                    <p className='lf-daynote'>
-                        <svg
-                            width='38'
-                            height='38'
-                            viewBox='0 0 40 40'
-                            {...doodle}
-                            aria-hidden='true'
-                        >
-                            <circle cx='20' cy='20' r='7' />
-                            <path d='M20 4v5M20 31v5M4 20h5M31 20h5M8.7 8.7l3.5 3.5M27.8 27.8l3.5 3.5M31.3 8.7l-3.5 3.5M12.2 27.8l-3.5 3.5' />
-                        </svg>
-                        <span className='lf-hand'>
-                            bright on purpose: the portfolio is the night desk, this is the
-                            daylight.
+            <main>
+                <header className='lf-wrap lf-hero'>
+                    <div ref={heroRef} className='lf-rv'>
+                        <span className='lf-hand lf-note'>hi, you made it past the résumé :)</span>
+                        <h1>
+                            outside
+                            <br />
+                            the <i>screen</i>
+                        </h1>
+                        <p>
+                            A little corner for the places I’ve been, things I’ve enjoyed and
+                            moments worth keeping. Some travel memories, a bit of music, good coffee
+                            and whatever else finds its way here. Pull up a chair.
+                        </p>
+                        <p className='lf-daynote'>
+                            <svg
+                                width='38'
+                                height='38'
+                                viewBox='0 0 40 40'
+                                {...doodle}
+                                aria-hidden='true'
+                            >
+                                <circle cx='20' cy='20' r='7' />
+                                <path d='M20 4v5M20 31v5M4 20h5M31 20h5M8.7 8.7l3.5 3.5M27.8 27.8l3.5 3.5M31.3 8.7l-3.5 3.5M12.2 27.8l-3.5 3.5' />
+                            </svg>
+                            <span className='lf-hand'>
+                                bright on purpose: the portfolio is the night desk, this is the
+                                daylight.
+                            </span>
+                        </p>
+                    </div>
+                    <div className='lf-stack'>
+                        {HERO.slice(0, 3).map((h, i) => (
+                            <figure key={i} className={`lf-pol lf-p${i + 1}`}>
+                                {i === 0 && <span className='lf-tape' />}
+                                <Photo item={h} index={i} onOpen={() => open(HERO, i)} eager />
+                                <figcaption>{h.cap}</figcaption>
+                            </figure>
+                        ))}
+                        <span className='lf-hand lf-arrow'>
+                            scroll, it’s a mess in a good way ↓
                         </span>
-                    </p>
-                </div>
-                <div className='lf-stack'>
-                    {HERO.slice(0, 3).map((h, i) => (
-                        <figure key={i} className={`lf-pol lf-p${i + 1}`}>
-                            {i === 0 && <span className='lf-tape' />}
-                            <Photo item={h} index={i} onOpen={() => open(HERO, i)} eager />
-                            <figcaption>{h.cap}</figcaption>
-                        </figure>
-                    ))}
-                    <span className='lf-hand lf-arrow'>scroll, it’s a mess in a good way ↓</span>
-                </div>
-            </header>
+                    </div>
+                </header>
 
-            <div className='lf-wrap lf-sec'>
-                <Reveal className='lf-head'>
-                    <h2>postcards</h2>
-                    <span className='lf-hand'>proof i touch grass</span>
-                </Reveal>
-                <div
-                    ref={clipRef}
-                    className={`lf-clip ${expanded ? '' : 'is-collapsed'} ${overflowing && !expanded ? 'is-clipped' : ''}`}
-                >
-                    <div ref={logRef} className='lf-log'>
-                        {columns.map((col, ci) => (
-                            <div key={ci} className='lf-col'>
-                                {col.items.map(([t, i]) => (
-                                    <figure
-                                        key={`${t.src}-${i}`}
-                                        className='lf-pol'
-                                        style={{ '--rot': `${rot[i % 4]}deg` }}
-                                    >
-                                        <span className='lf-meta'>
-                                            {t.place} · {t.date}
-                                        </span>
-                                        {t.stamp && (
-                                            <span className='lf-stampc'>
-                                                {t.stamp}
-                                                <br />
-                                                {t.date.slice(-4)}
+                <div className='lf-wrap lf-sec'>
+                    <Reveal className='lf-head'>
+                        <h2>postcards</h2>
+                        <span className='lf-hand'>proof i touch grass</span>
+                    </Reveal>
+                    <div
+                        ref={clipRef}
+                        className={`lf-clip ${expanded ? '' : 'is-collapsed'} ${overflowing && !expanded ? 'is-clipped' : ''}`}
+                        onFocus={(e) => {
+                            if (expanded) return;
+                            const clip = clipRef.current.getBoundingClientRect();
+                            if (e.target.getBoundingClientRect().top > clip.bottom - 60)
+                                setExpanded(true);
+                        }}
+                    >
+                        <div ref={logRef} className='lf-log'>
+                            {columns.map((col, ci) => (
+                                <div key={ci} className='lf-col'>
+                                    {col.items.map(([t, i]) => (
+                                        <figure
+                                            key={`${t.src}-${i}`}
+                                            className='lf-pol'
+                                            style={{ '--rot': `${rot[i % 4]}deg` }}
+                                        >
+                                            <span className='lf-meta'>
+                                                {t.place} · {t.date}
                                             </span>
-                                        )}
-                                        <Photo item={t} index={i} onOpen={() => open(SORTED, i)} />
-                                        <figcaption>{t.cap}</figcaption>
-                                    </figure>
-                                ))}
-                            </div>
-                        ))}
+                                            {t.stamp && (
+                                                <span className='lf-stampc'>
+                                                    {t.stamp}
+                                                    <br />
+                                                    {t.date.slice(-4)}
+                                                </span>
+                                            )}
+                                            <Photo
+                                                item={t}
+                                                index={i}
+                                                onOpen={() => open(SORTED, i)}
+                                            />
+                                            <figcaption>{t.cap}</figcaption>
+                                        </figure>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
                     </div>
+                    {overflowing && !expanded && (
+                        <p className='lf-morewrap'>
+                            <button
+                                type='button'
+                                className='lf-more'
+                                onClick={() => setExpanded(true)}
+                            >
+                                more from the roll
+                            </button>
+                        </p>
+                    )}
                 </div>
-                {overflowing && !expanded && (
-                    <p className='lf-morewrap'>
-                        <button type='button' className='lf-more' onClick={() => setExpanded(true)}>
-                            more from the roll
-                        </button>
-                    </p>
-                )}
-            </div>
 
-            <div className='lf-wrap lf-sec'>
-                <Reveal className='lf-head'>
-                    <h2>analog hours</h2>
-                    <span className='lf-hand'>music and coffee</span>
-                </Reveal>
-                <Reveal className='lf-misc'>
-                    <div className='lf-tapec'>
-                        <Cassette />
-                    </div>
-                    <div className='lf-rcpt'>
-                        <div>
-                            <b>{RECEIPT.cafe}</b>
-                            <span>{RECEIPT.table}</span>
+                <div className='lf-wrap lf-sec'>
+                    <Reveal className='lf-head'>
+                        <h2>analog hours</h2>
+                        <span className='lf-hand'>music and coffee</span>
+                    </Reveal>
+                    <Reveal className='lf-misc'>
+                        <div className='lf-tapec'>
+                            <Cassette />
                         </div>
-                        <hr />
-                        {RECEIPT.lines.map(([n, p]) => (
-                            <div key={n}>
-                                <span>{n}</span>
-                                <span>{p}</span>
+                        <div className='lf-rcpt'>
+                            <div>
+                                <b>{RECEIPT.cafe}</b>
+                                <span>{RECEIPT.table}</span>
                             </div>
-                        ))}
-                        <hr />
-                        <div>
-                            <b>TOTAL</b>
-                            <b>{RECEIPT.total}</b>
+                            <hr />
+                            {RECEIPT.lines.map(([n, p]) => (
+                                <div key={n}>
+                                    <span>{n}</span>
+                                    <span>{p}</span>
+                                </div>
+                            ))}
+                            <hr />
+                            <div>
+                                <b>TOTAL</b>
+                                <b>{RECEIPT.total}</b>
+                            </div>
                         </div>
-                    </div>
-                </Reveal>
-            </div>
+                    </Reveal>
+                </div>
 
-            <div className='lf-foot'>
-                <Reveal>
-                    <p className='lf-bye'>
-                        that’s the tour.
-                        <PiixPal pal='capy' src={CAPY_SRC} at={0.06} />
-                    </p>
-                    <div className='lf-doodles'>
-                        <svg
-                            width='54'
-                            height='54'
-                            viewBox='0 0 56 56'
-                            {...doodle}
-                            aria-hidden='true'
-                        >
-                            <circle cx='28' cy='28' r='22' />
-                            <path d='M28 18l9 7-3 11H22l-3-11z' />
-                            <path d='M28 18v-6M37 25l9-3M34 36l5 8M22 36l-5 8M19 25l-9-3' />
-                        </svg>
-                        <span className='lf-hand'>
-                            p.s. when the IDE closes — sports, gaming, and zero tabs open
-                        </span>
-                        <svg
-                            width='64'
-                            height='44'
-                            viewBox='0 0 72 48'
-                            {...doodle}
-                            aria-hidden='true'
-                        >
-                            <path d='M14 8h44c8 0 12 14 12 24 0 5-4 7-8 4l-8-8H18l-8 8c-4 3-8 1-8-4 0-10 4-24 12-24z' />
-                            <path d='M20 16v8M16 20h8' />
-                            <circle cx='50' cy='17' r='2' />
-                            <circle cx='57' cy='22' r='2' />
-                        </svg>
-                    </div>
-                    <p className='lf-back'>
-                        back to the <Link to={LINKS.portfolio}>night desk (portfolio)</Link> · say
-                        hi on{' '}
-                        <a href={LINKS.linkedin} target='_blank' rel='noopener noreferrer'>
-                            LinkedIn
-                        </a>
-                    </p>
-                </Reveal>
-            </div>
+                <div className='lf-foot'>
+                    <Reveal>
+                        <p className='lf-bye'>
+                            that’s the tour.
+                            <PiixPal pal='capy' src={CAPY_SRC} at={0.06} />
+                        </p>
+                        <div className='lf-doodles'>
+                            <svg
+                                width='54'
+                                height='54'
+                                viewBox='0 0 56 56'
+                                {...doodle}
+                                aria-hidden='true'
+                            >
+                                <circle cx='28' cy='28' r='22' />
+                                <path d='M28 18l9 7-3 11H22l-3-11z' />
+                                <path d='M28 18v-6M37 25l9-3M34 36l5 8M22 36l-5 8M19 25l-9-3' />
+                            </svg>
+                            <span className='lf-hand'>
+                                p.s. when the IDE closes — sports, gaming, and zero tabs open
+                            </span>
+                            <svg
+                                width='64'
+                                height='44'
+                                viewBox='0 0 72 48'
+                                {...doodle}
+                                aria-hidden='true'
+                            >
+                                <path d='M14 8h44c8 0 12 14 12 24 0 5-4 7-8 4l-8-8H18l-8 8c-4 3-8 1-8-4 0-10 4-24 12-24z' />
+                                <path d='M20 16v8M16 20h8' />
+                                <circle cx='50' cy='17' r='2' />
+                                <circle cx='57' cy='22' r='2' />
+                            </svg>
+                        </div>
+                        <p className='lf-back'>
+                            back to the <Link to={LINKS.portfolio}>night desk (portfolio)</Link> ·
+                            say hi on{' '}
+                            <a href={LINKS.linkedin} target='_blank' rel='noopener noreferrer'>
+                                LinkedIn
+                            </a>
+                        </p>
+                    </Reveal>
+                </div>
+            </main>
 
             <div id='lf-progress' className='lf-progress' aria-hidden='true' />
             <PiixPal
