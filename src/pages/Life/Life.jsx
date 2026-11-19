@@ -7,6 +7,9 @@ import './life.css';
 
 // a capybara reading the sign-off line (the portfolio has the kitty)
 const CAPY_SRC = 'https://cdn.jsdelivr.net/npm/piixpal@0.4/dist/c/capy.min.js';
+// reading-progress bar with a runner (works here because /life scrolls the window)
+const SCROLLY_SRC = 'https://cdn.jsdelivr.net/npm/piixpal@0.4/dist/c/scrolly.min.js';
+
 const FONTS =
     'https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Lora:wght@400;500&family=Fira+Code:wght@400;500&display=swap';
 const TONES = [
@@ -208,8 +211,8 @@ function Cassette() {
                 ))}
             </g>
             <path
-                d='M250 100q30-14 62 0'
-                stroke='#B8581F'
+                d='M262 42q14-9 28 0t28 0'
+                stroke='#F5ECD7'
                 strokeWidth='3'
                 fill='none'
                 strokeLinecap='round'
@@ -479,6 +482,15 @@ export default function Life() {
                     </p>
                 </Reveal>
             </div>
+
+            <div id='lf-progress' className='lf-progress' aria-hidden='true' />
+            <PiixPal
+                pal='scrolly'
+                src={SCROLLY_SRC}
+                side='top'
+                color='#C25E1B'
+                box='#lf-progress'
+            />
 
             <SiteFooter motto='wander · eat · listen · repeat' fixed />
 

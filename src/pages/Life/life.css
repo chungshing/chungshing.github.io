@@ -329,6 +329,16 @@ html.life-route body {
     transform: rotate(0);
 }
 
+.life .lf-progress {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 4px;
+    z-index: 40;
+    pointer-events: none;
+}
+
 /* everything else: cassette + receipt */
 .life [data-piixpal] {
     filter: drop-shadow(0 1px 0 rgba(58, 40, 25, 0.25));
