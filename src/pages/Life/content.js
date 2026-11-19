@@ -76,7 +76,6 @@ export const TRIPS = [
         place: 'Japan',
         date: 'May 2026',
         cap: 'perfectly balanced yin and yang',
-        crop: '1/1',
     },
 
     // April 2025
@@ -115,6 +114,7 @@ export const TRIPS = [
         ratio: '9/16',
     },
 ];
+
 // Cassette label: keep each line under ~28 characters.
 export const TRACKS = [
     { song: 'Show Me How', artist: 'Men I Trust' },
