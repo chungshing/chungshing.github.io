@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from '../lib/router.jsx';
 import './Navbar.css';
 
 const LINKS = [
@@ -66,6 +67,9 @@ export default function Navbar({ scrollRef }) {
                     {l.label}
                 </button>
             ))}
+            <Link to='/life' className='mono navbar-link navbar-link--out'>
+                Outside the Screen →
+            </Link>
         </nav>
     );
 }

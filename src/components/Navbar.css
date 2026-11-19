@@ -45,3 +45,23 @@
   border-left-color: var(--accent-amber);
   padding-left: 18px;
 }
+
+/* link to the other page (a real route, not a scroll target) */
+.navbar-link--out {
+  display: block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: var(--accent-rust);
+  border-left-style: dashed;
+}
+
+.navbar-link--out:hover {
+  color: var(--accent-amber);
+}
+
+@media (max-width: 900px) {
+  .navbar-link--out {
+    margin-top: 0;
+    white-space: nowrap;
+  }
+}
