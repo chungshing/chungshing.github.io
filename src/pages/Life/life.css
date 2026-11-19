@@ -264,11 +264,15 @@ html.life-route body {
     pointer-events: none;
 }
 .life .lf-log {
-    columns: 3 230px;
-    column-gap: 1.3rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.3rem;
+}
+.life .lf-col {
+    flex: 1;
+    min-width: 0;
 }
 .life .lf-log .lf-pol {
-    break-inside: avoid;
     margin-bottom: 1.6rem;
     width: 100%;
 }
@@ -543,8 +547,7 @@ html.life-route body {
         --collapsed: 560px;
     }
     .life .lf-log {
-        columns: 2 140px;
-        column-gap: 0.9rem;
+        gap: 0.9rem;
     }
     .life .lf-log .lf-pol {
         padding: 0.4rem 0.4rem 2.2rem;

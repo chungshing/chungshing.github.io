@@ -1,5 +1,5 @@
 import { PiixPal } from 'piixpal/react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import SiteFooter from '../../components/SiteFooter.jsx';
 import { ASSETS_BASE, HERO, LINKS, RECEIPT, TRACKS, TRIPS } from './content.js';
 import './life.css';
@@ -16,6 +16,25 @@ const TONES = [
     ['#8A9A5B', '#3F4A22'],
     ['#2F4A5A', '#C98A4B'],
 ];
+
+// Newest first by `date` ('Mar 2026'); ties keep the order in content.js. Year-only dates count as January.
+const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+const when = (d = '') => {
+    const y = Number((d.match(/\d{4}/) || [0])[0]);
+    const m = MONTHS.indexOf(((d.match(/[A-Za-z]{3}/) || [''])[0] || '').toLowerCase());
+    return y * 12 + Math.max(m, 0);
+};
+const SORTED = TRIPS.map((t, i) => [t, i])
+    .sort((a, b) => when(b[0].date) - when(a[0].date) || a[1] - b[1])
+    .map(([t]) => t);
+
+// Rough card height (in column widths) used to drop each photo into the shortest column.
+const heightOf = (t) => {
+    const [a, b] = String(t.crop || t.ratio || '3/4')
+        .split('/')
+        .map(Number);
+    return b / a + 0.3;
+};
 
 const urlFor = (src) => (!src ? null : /^https?:/.test(src) ? src : ASSETS_BASE + src);
 const tone = (i) => TONES[i % TONES.length];
@@ -151,12 +170,7 @@ function Lightbox({ view, onClose, onNav }) {
 
 function Cassette() {
     return (
-        <svg
-            viewBox='0 0 360 230'
-            role='img'
-            aria-label='Cassette tape: Side A, on repeat'
-            className='lf-cassette'
-        >
+        <svg viewBox='0 0 360 230' role='img' aria-label='Cassette tape' className='lf-cassette'>
             <rect
                 x='4'
                 y='4'
@@ -232,6 +246,7 @@ const doodle = {
 };
 
 export default function Life() {
+    const [cols, setCols] = useState(3);
     const [expanded, setExpanded] = useState(false);
     const [overflowing, setOverflowing] = useState(false);
     const clipRef = useRef(null);
@@ -257,6 +272,26 @@ export default function Life() {
             document.title = prevTitle;
         };
     }, []);
+
+    useEffect(() => {
+        const el = logRef.current;
+        if (!el) return;
+        const ro = new ResizeObserver(([e]) => setCols(e.contentRect.width < 620 ? 2 : 3));
+        ro.observe(el);
+        return () => ro.disconnect();
+    }, []);
+
+    // Pinterest-style placement: each photo goes into the shortest column, in date order,
+    // so the first row reads left to right and so on down the page.
+    const columns = useMemo(() => {
+        const out = Array.from({ length: cols }, () => ({ h: 0, items: [] }));
+        SORTED.forEach((t, i) => {
+            const c = out.reduce((a, b) => (b.h < a.h ? b : a));
+            c.items.push([t, i]);
+            c.h += heightOf(t);
+        });
+        return out;
+    }, [cols]);
 
     useEffect(() => {
         const inner = logRef.current;
@@ -335,25 +370,29 @@ export default function Life() {
                     className={`lf-clip ${expanded ? '' : 'is-collapsed'} ${overflowing && !expanded ? 'is-clipped' : ''}`}
                 >
                     <div ref={logRef} className='lf-log'>
-                        {TRIPS.map((t, i) => (
-                            <figure
-                                key={`${t.src}-${i}`}
-                                className='lf-pol'
-                                style={{ '--rot': `${rot[i % 4]}deg` }}
-                            >
-                                <span className='lf-meta'>
-                                    {t.place} · {t.date}
-                                </span>
-                                {t.stamp && (
-                                    <span className='lf-stampc'>
-                                        {t.stamp}
-                                        <br />
-                                        {t.date.slice(-4)}
-                                    </span>
-                                )}
-                                <Photo item={t} index={i} onOpen={() => open(TRIPS, i)} />
-                                <figcaption>{t.cap}</figcaption>
-                            </figure>
+                        {columns.map((col, ci) => (
+                            <div key={ci} className='lf-col'>
+                                {col.items.map(([t, i]) => (
+                                    <figure
+                                        key={`${t.src}-${i}`}
+                                        className='lf-pol'
+                                        style={{ '--rot': `${rot[i % 4]}deg` }}
+                                    >
+                                        <span className='lf-meta'>
+                                            {t.place} · {t.date}
+                                        </span>
+                                        {t.stamp && (
+                                            <span className='lf-stampc'>
+                                                {t.stamp}
+                                                <br />
+                                                {t.date.slice(-4)}
+                                            </span>
+                                        )}
+                                        <Photo item={t} index={i} onOpen={() => open(SORTED, i)} />
+                                        <figcaption>{t.cap}</figcaption>
+                                    </figure>
+                                ))}
+                            </div>
                         ))}
                     </div>
                 </div>
