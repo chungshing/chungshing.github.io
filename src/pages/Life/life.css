@@ -1,5 +1,6 @@
 /* /life — everything is scoped under .life (or html.life-route) so the homepage is untouched. */
 html.life-route {
+    --piix-z: 10;
     color-scheme: light;
     /* page still scrolls, but no scrollbar takes width: content centres on the full window, like the portfolio */
     scrollbar-width: none;

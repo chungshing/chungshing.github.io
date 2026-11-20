@@ -267,7 +267,7 @@ const doodle = {
 export default function Life() {
     const [cols, setCols] = useState(3);
     const [expanded, setExpanded] = useState(false);
-    const [overflowing, setOverflowing] = useState(false);
+    const [overflowing, setOverflowing] = useState(true);
     const clipRef = useRef(null);
     const logRef = useRef(null);
     const [view, setView] = useState(null);
@@ -281,13 +281,6 @@ export default function Life() {
         html.classList.add('life-route');
         document.title = 'Outside the Screen | Chung Shing';
         if (meta) meta.content = '#e9ddc3';
-        let link = document.getElementById('life-fonts');
-        if (!link) {
-            link = document.createElement('link');
-            link.id = 'life-fonts';
-            link.rel = 'stylesheet';
-            document.head.appendChild(link);
-        }
         return () => {
             html.classList.remove('life-route');
             document.title = prevTitle;
