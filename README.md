@@ -1,24 +1,15 @@
 # Portfolio Website
 
-Personal software engineering portfolio built with React, styled as a lo-fi café notebook.
+Personal portfolio built with React, styled as a lo-fi café notebook.
 
-## Live
+- **`/`** – the portfolio
+- **`/life`** – _Outside the Screen_: travel photos, music and coffee
 
-[chungshing.github.io](https://chungshing.github.io/)
+Live: [chungshing.github.io](https://chungshing.github.io/)
 
 ## Stack
 
-- React 18
-- Vite
-- CSS
-- lucide-react
-
-## Features
-
-- Project showcase with demos, videos, and screenshot gallery
-- Work/studies timeline with tabs
-- Skills grouped by category
-- Responsive layout
+React 18 · Vite · CSS · lucide-react · piixpal
 
 ## Run locally
 
@@ -26,6 +17,11 @@ Personal software engineering portfolio built with React, styled as a lo-fi caf�
 npm install
 npm run dev
 ```
+
+## Edit content
+
+- Portfolio: `src/data/` and the bio in `src/pages/Home/Home.jsx`
+- /life: `src/pages/Life/content.js`
 
 ## Deploy
 
