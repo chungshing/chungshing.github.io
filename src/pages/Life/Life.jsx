@@ -13,7 +13,7 @@ const SCROLLY_SRC = 'https://cdn.jsdelivr.net/npm/piixpal@0.4/dist/c/scrolly.min
 const FONTS =
     'https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Lora:wght@400;500&family=Fira+Code:wght@400;500&display=swap';
 const TONES = [
-    ['#C98A4B', '#7C4A22'],
+    ['#A3A97C', '#66652F'],
     ['#A3A97C', '#4F5226'],
     ['#8FC4BE', '#2F6F6B'],
     ['#6F7F8C', '#2E2218'],
@@ -261,8 +261,11 @@ export default function Life() {
     useLayoutEffect(() => {
         const html = document.documentElement;
         const prevTitle = document.title;
+        const meta = document.querySelector('meta[name="theme-color"]');
+        const prevColor = meta?.content;
         html.classList.add('life-route');
         document.title = 'Outside the Screen | Chung Shing';
+        if (meta) meta.content = '#e9ddc3';
         let link = document.getElementById('life-fonts');
         if (!link) {
             link = document.createElement('link');
@@ -274,6 +277,7 @@ export default function Life() {
         return () => {
             html.classList.remove('life-route');
             document.title = prevTitle;
+            if (meta) meta.content = prevColor;
         };
     }, []);
 
