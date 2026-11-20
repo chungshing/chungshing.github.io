@@ -10,8 +10,9 @@ const CAPY_SRC = 'https://cdn.jsdelivr.net/npm/piixpal@0.4/dist/c/capy.min.js';
 // reading-progress bar with a runner (works here because /life scrolls the window)
 const SCROLLY_SRC = 'https://cdn.jsdelivr.net/npm/piixpal@0.4/dist/c/scrolly.min.js';
 
-const FONTS =
-    'https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Lora:wght@400;500&family=Fira+Code:wght@400;500&display=swap';
+const WIDTHS = [240, 360, 480, 640, 800];
+const GRID_SIZES = '(max-width: 760px) 46vw, (max-width: 1080px) 30vw, 330px';
+
 const TONES = [
     ['#A3A97C', '#66652F'],
     ['#A3A97C', '#4F5226'],
@@ -40,7 +41,13 @@ const heightOf = (t) => {
     return b / a + 0.3;
 };
 
-const urlFor = (src) => (!src ? null : /^https?:/.test(src) ? src : ASSETS_BASE + src);
+const urlFor = (src, width) => {
+    if (!src) return null;
+    const full = /^https?:/.test(src) ? src : ASSETS_BASE + src;
+    return width
+        ? `https://wsrv.nl/?url=${encodeURIComponent(full)}&w=${width}&we&output=webp&q=75`
+        : full;
+};
 const tone = (i) => TONES[i % TONES.length];
 const label = (t) => (t.place ? `${t.place}, ${t.date} — ${t.cap}` : t.cap);
 
@@ -74,7 +81,7 @@ function Reveal({ className = '', children }) {
     );
 }
 
-function Photo({ item, index, onOpen, eager = false }) {
+function Photo({ item, index, onOpen, eager = false, sizes = GRID_SIZES }) {
     const [natural, setNatural] = useState(null);
     const url = urlFor(item.src);
     const [a, b] = tone(index);
@@ -88,7 +95,9 @@ function Photo({ item, index, onOpen, eager = false }) {
         >
             {url && (
                 <img
-                    src={url}
+                    src={urlFor(item.src, 480)}
+                    srcSet={WIDTHS.map((w) => `${urlFor(item.src, w)} ${w}w`).join(', ')}
+                    sizes={sizes}
                     alt={item.alt || item.cap}
                     loading={eager ? 'eager' : 'lazy'}
                     decoding='async'
@@ -97,6 +106,12 @@ function Photo({ item, index, onOpen, eager = false }) {
                             `${e.currentTarget.naturalWidth}/${e.currentTarget.naturalHeight}`
                         )
                     }
+                    onError={(e) => {
+                        if (e.currentTarget.dataset.fb) return;
+                        e.currentTarget.dataset.fb = 1;
+                        e.currentTarget.removeAttribute('srcset');
+                        e.currentTarget.src = urlFor(item.src);
+                    }}
                 />
             )}
         </button>
@@ -271,7 +286,6 @@ export default function Life() {
             link = document.createElement('link');
             link.id = 'life-fonts';
             link.rel = 'stylesheet';
-            link.href = FONTS;
             document.head.appendChild(link);
         }
         return () => {
@@ -361,7 +375,13 @@ export default function Life() {
                         {HERO.slice(0, 3).map((h, i) => (
                             <figure key={i} className={`lf-pol lf-p${i + 1}`}>
                                 {i === 0 && <span className='lf-tape' />}
-                                <Photo item={h} index={i} onOpen={() => open(HERO, i)} eager />
+                                <Photo
+                                    item={h}
+                                    index={i}
+                                    onOpen={() => open(HERO, i)}
+                                    eager
+                                    sizes='(max-width: 760px) 55vw, 270px'
+                                />
                                 <figcaption>{h.cap}</figcaption>
                             </figure>
                         ))}
