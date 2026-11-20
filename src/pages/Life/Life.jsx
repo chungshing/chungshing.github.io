@@ -15,10 +15,10 @@ const FONTS =
 const TONES = [
     ['#C98A4B', '#7C4A22'],
     ['#A3A97C', '#4F5226'],
-    ['#E4B36B', '#B8581F'],
+    ['#8FC4BE', '#2F6F6B'],
     ['#6F7F8C', '#2E2218'],
     ['#8A9A5B', '#3F4A22'],
-    ['#2F4A5A', '#C98A4B'],
+    ['#2F4A5A', '#79B3AD'],
 ];
 
 // Newest first by `date` ('Mar 2026'); ties keep the order in content.js. Year-only dates count as January.
@@ -181,7 +181,7 @@ function Cassette() {
                 width='352'
                 height='222'
                 rx='14'
-                fill='#B8581F'
+                fill='#3F7F7B'
                 stroke='#3A2819'
                 strokeWidth='3'
             />
@@ -192,7 +192,7 @@ function Cassette() {
                 <circle cx='342' cy='212' r='5' />
             </g>
             <rect x='28' y='28' width='304' height='104' rx='6' fill='#F5ECD7' />
-            <rect x='28' y='28' width='304' height='26' rx='6' fill='#66652F' />
+            <rect x='28' y='28' width='304' height='26' rx='6' fill='#2F6F6B' />
             <text
                 x='42'
                 y='47'
@@ -231,7 +231,7 @@ function Cassette() {
                     </g>
                 ))}
             </g>
-            <path d='M52 226l26-30h204l26 30z' fill='#7A3A12' />
+            <path d='M52 226l26-30h204l26 30z' fill='#2A5753' />
             <g fill='#2E2218'>
                 <circle cx='112' cy='211' r='4' />
                 <circle cx='180' cy='211' r='4' />
@@ -435,22 +435,24 @@ export default function Life() {
                         <div className='lf-tapec'>
                             <Cassette />
                         </div>
-                        <div className='lf-rcpt'>
-                            <div>
-                                <b>{RECEIPT.cafe}</b>
-                                <span>{RECEIPT.table}</span>
-                            </div>
-                            <hr />
-                            {RECEIPT.lines.map(([n, p]) => (
-                                <div key={n}>
-                                    <span>{n}</span>
-                                    <span>{p}</span>
+                        <div className='lf-rcptc'>
+                            <div className='lf-rcpt'>
+                                <div>
+                                    <b>{RECEIPT.cafe}</b>
+                                    <span>{RECEIPT.table}</span>
                                 </div>
-                            ))}
-                            <hr />
-                            <div>
-                                <b>TOTAL</b>
-                                <b>{RECEIPT.total}</b>
+                                <hr />
+                                {RECEIPT.lines.map(([n, p]) => (
+                                    <div key={n}>
+                                        <span>{n}</span>
+                                        <span>{p}</span>
+                                    </div>
+                                ))}
+                                <hr />
+                                <div>
+                                    <b>TOTAL</b>
+                                    <b>{RECEIPT.total}</b>
+                                </div>
                             </div>
                         </div>
                     </Reveal>
@@ -506,7 +508,7 @@ export default function Life() {
                 pal='scrolly'
                 src={SCROLLY_SRC}
                 side='top'
-                color='#C25E1B'
+                color='#4F8F8B'
                 box='#lf-progress'
             />
 

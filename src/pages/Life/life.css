@@ -4,6 +4,9 @@ html.life-route {
     /* page still scrolls, but no scrollbar takes width: content centres on the full window, like the portfolio */
     scrollbar-width: none;
     -ms-overflow-style: none;
+    --lofi-bg: #e9ddc3;
+    --lofi-border: #c9a57a;
+    --lofi-filter: invert(1) hue-rotate(-20deg) saturate(0.8);
 }
 html.life-route::-webkit-scrollbar,
 html.life-route body::-webkit-scrollbar {
@@ -26,11 +29,11 @@ html.life-route body {
     --paper: #f5ecd7;
     --ink: #3a2819;
     --soft: #6f5a45;
-    --rust: #c25e1b;
+    --accent: #4a8f84;
+    --accent-text: #2f6b60;
     --sf-border: var(--tan);
     --sf-text: var(--soft);
     --sf-bg: var(--bg);
-    --rust-text: #9a4513;
     --rule: rgba(58, 40, 25, 0.08);
     --olive: #66652f;
     --tan: #c9a57a;
@@ -55,7 +58,7 @@ html.life-route body {
     box-sizing: border-box;
 }
 .life ::selection {
-    background: #f4bb3d;
+    background: #bfe0dc;
     color: #3a2819;
 }
 .life h1,
@@ -103,12 +106,12 @@ html.life-route body {
 .life .lf-hand {
     font-family: 'Caveat', cursive;
     font-weight: 700;
-    color: var(--rust);
+    color: var(--accent);
     line-height: 1.1;
 }
 .life .lf-head .lf-hand {
     font-size: 1.55rem;
-    color: var(--rust-text);
+    color: var(--accent-text);
 }
 .life .lf-sec {
     padding: 4rem 1.25rem;
@@ -142,7 +145,7 @@ html.life-route body {
 .life .lf-ph:focus-visible,
 .life .lf-more:focus-visible,
 .life .lf-lb button:focus-visible {
-    outline: 3px solid var(--rust);
+    outline: 3px solid var(--accent);
     outline-offset: 3px;
 }
 .life .lf-pol {
@@ -176,7 +179,7 @@ html.life-route body {
     width: 84px;
     height: 26px;
     margin-left: -42px;
-    background: #f4bb3daa;
+    background: #79b3adaa;
     transform: rotate(-4deg);
     z-index: 2;
 }
@@ -187,14 +190,14 @@ html.life-route body {
     gap: 0.7rem;
     max-width: 40ch;
     margin-top: 1.3rem;
-    color: var(--rust-text);
+    color: var(--accent-text);
 }
 .life .lf-daynote svg {
     flex: none;
 }
 .life .lf-daynote .lf-hand {
     font-size: 1.35rem;
-    color: var(--rust-text);
+    color: var(--accent-text);
     transform: rotate(-1deg);
 }
 
@@ -226,6 +229,7 @@ html.life-route body {
     left: 0;
     top: 30px;
     --rot: -6deg;
+    z-index: 2;
 }
 .life .lf-p2 {
     right: 0;
@@ -301,9 +305,9 @@ html.life-route body {
     z-index: 3;
     width: 48px;
     height: 56px;
-    border: 2px dashed var(--rust);
+    border: 2px dashed var(--accent);
     background: #fbf5e6e6;
-    color: var(--rust);
+    color: var(--accent);
     display: grid;
     place-items: center;
     text-align: center;
@@ -323,7 +327,7 @@ html.life-route body {
         cursive;
     color: #3a2819;
     background: #fbf5e6;
-    border: 2px dashed var(--rust);
+    border: 2px dashed var(--accent);
     padding: 0.4rem 1.4rem;
     cursor: pointer;
     transform: rotate(-1.5deg);
@@ -372,19 +376,24 @@ html.life-route body {
 .life .lf-tapec:hover .lf-reel {
     transform: rotate(240deg);
 }
-.life .lf-rcpt {
+.life .lf-rcptc {
     grid-column: 7 / 13;
+    display: flex;
+    filter: drop-shadow(0 10px 14px var(--shadow));
+}
+.life .lf-rcpt {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: #fff;
-    color: #222;
+    background: #fffaf0;
+    color: #3a2819;
     font:
         1rem/1.5 'Fira Code',
         ui-monospace,
         monospace;
     padding: 1.1rem 1.1rem 1.6rem;
-    transform: rotate(-1.5deg);
+    transform: rotate(1.5deg) translateY(-5px);
     clip-path: polygon(
         0 0,
         100% 0,
@@ -413,7 +422,7 @@ html.life-route body {
     transition: transform 0.35s ease;
 }
 .life .lf-rcpt:hover {
-    transform: rotate(-1.5deg) translateY(-5px);
+    transform: rotate(0deg) translateY(-6px) scale(1.02);
 }
 .life .lf-rcpt > div {
     display: flex;
@@ -438,11 +447,11 @@ html.life-route body {
     flex-wrap: wrap;
     gap: 1rem;
     margin: 1.8rem 0 1.4rem;
-    color: var(--rust);
+    color: var(--accent);
 }
 .life .lf-doodles .lf-hand {
     font-size: 1.3rem;
-    color: var(--rust-text);
+    color: var(--accent-text);
     transform: rotate(-2deg);
 }
 .life .lf-bye {
@@ -599,5 +608,6 @@ html.life-route body {
     }
     .life .lf-rcpt {
         padding-top: 1.6rem;
+        margin-top: 0.4rem;
     }
 }
