@@ -1,6 +1,6 @@
 import './LofiBar.css';
 
-const RADIO_EMBED_URL = 'https://embed.datamind.fm/?layout=mini';
+const RADIO_EMBED_URL = 'https://embed.datamind.fm/?layout=mini&theme=transparent';
 
 export default function LofiBar() {
     return (

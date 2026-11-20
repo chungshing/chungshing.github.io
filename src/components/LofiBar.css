@@ -8,8 +8,8 @@
     height: 56px;
     overflow: hidden;
 
-    background: #282828;
-    border: 1px solid #504945;
+    background: var(--lofi-bg, var(--bg, #282828));
+    border: 1px solid var(--lofi-border, var(--border, #504945));
     border-radius: 10px;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.24);
 }
@@ -19,9 +19,13 @@
     width: 320px;
     height: 64px;
     border: 0;
+    background: transparent;
 
     transform: scale(0.8125);
     transform-origin: top left;
+
+    filter: var(--lofi-filter, none);
+    transition: filter 0.3s;
 }
 
 @media (max-width: 600px) {
