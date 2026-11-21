@@ -23,7 +23,7 @@ export default function CoderCard() {
 
             <p className='coder-card-label mono'>currently</p>
 
-            <ul className='coder-card-list'>
+            <ul className='coder-card-list' tabIndex={0} aria-label='Currently working on'>
                 {CURRENTLY.map((line) => (
                     <li key={line} className='mono'>
                         {line}

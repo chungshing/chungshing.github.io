@@ -307,7 +307,7 @@ html.life-route body {
     height: 56px;
     border: 2px dashed var(--accent);
     background: #fbf5e6e6;
-    color: var(--accent);
+    color: var(--accent-text);
     display: grid;
     place-items: center;
     text-align: center;

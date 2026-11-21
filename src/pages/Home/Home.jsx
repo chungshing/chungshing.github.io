@@ -45,7 +45,7 @@ export default function Home() {
     return (
         <div className='page'>
             <div className='layout'>
-                <aside className='hero-col'>
+                <aside className='hero-col' aria-label='About me'>
                     <HeroCard />
                     <CoderCard />
                 </aside>
@@ -271,7 +271,7 @@ export default function Home() {
                     </main>
                 </div>
 
-                <aside className='nav-col'>
+                <aside className='nav-col' aria-label='Page sections'>
                     <Navbar scrollRef={contentRef} />
                 </aside>
             </div>

@@ -255,6 +255,11 @@
     scrollbar-width: none;
 }
 
+.coder-card-list:focus-visible {
+    outline: 2px solid var(--accent-amber);
+    outline-offset: 2px;
+}
+
 .coder-card-list::-webkit-scrollbar {
     display: none;
 }
@@ -414,9 +419,10 @@
     resize: vertical;
 }
 
-.form-row input:focus,
-.form-row textarea:focus {
-    outline: none;
+.form-row input:focus-visible,
+.form-row textarea:focus-visible {
+    outline: 2px solid var(--accent-amber);
+    outline-offset: 2px;
     border-color: var(--accent-amber);
 }
 

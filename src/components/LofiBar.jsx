@@ -4,7 +4,7 @@ const RADIO_EMBED_URL = 'https://embed.datamind.fm/?layout=mini&theme=transparen
 
 export default function LofiBar() {
     return (
-        <div className='lofi-radio' aria-label='DataMind FM radio'>
+        <aside className='lofi-radio' aria-label='DataMind FM radio'>
             <iframe
                 className='lofi-radio__iframe'
                 src={RADIO_EMBED_URL}
@@ -15,6 +15,6 @@ export default function LofiBar() {
                 allow='autoplay'
                 referrerPolicy='strict-origin-when-cross-origin'
             />
-        </div>
+        </aside>
     );
 }

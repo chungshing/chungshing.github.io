@@ -33,7 +33,7 @@ export default function MarginNote({ children, speed = 35 }) {
     }, [started, shown, full, speed]);
 
     return (
-        <p className='margin-note' ref={ref} aria-label={full}>
+        <p className='margin-note' ref={ref} role='note' aria-label={full}>
             <span aria-hidden='true'>{full.slice(0, shown)}</span>
             <span aria-hidden='true' style={{ visibility: 'hidden' }}>
                 {full.slice(shown)}
