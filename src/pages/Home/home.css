@@ -957,10 +957,11 @@ section h2 {
     .navbar-link.is-active {
         border-left-color: transparent;
         border-bottom-color: var(--accent-amber);
+        padding-left: 2px; 
     }
 
     .navbar-link::after {
-        display: none;
+        left: 0;
     }
 
     .content-wrap {
