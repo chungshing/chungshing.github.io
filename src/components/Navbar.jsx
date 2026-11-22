@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from '../lib/router.jsx';
 import './Navbar.css';
 
@@ -12,6 +12,21 @@ const LINKS = [
 
 export default function Navbar({ scrollRef }) {
     const [active, setActive] = useState('about');
+    const navRef = useRef(null);
+
+    // On phones the nav is a horizontal strip: keep the active link scrolled into view.
+    useEffect(() => {
+        const nav = navRef.current;
+        const el = nav?.querySelector('.is-active');
+        if (!nav || !el || nav.scrollWidth <= nav.clientWidth + 2) return;
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const offset =
+            el.getBoundingClientRect().left - nav.getBoundingClientRect().left + nav.scrollLeft;
+        nav.scrollTo({
+            left: offset - (nav.clientWidth - el.offsetWidth) / 2,
+            behavior: reduced ? 'auto' : 'smooth',
+        });
+    }, [active]);
 
     useEffect(() => {
         const root = scrollRef?.current;
@@ -56,7 +71,7 @@ export default function Navbar({ scrollRef }) {
     };
 
     return (
-        <nav className='navbar'>
+        <nav className='navbar' ref={navRef}>
             {LINKS.map((l) => (
                 <button
                     key={l.id}
