@@ -106,7 +106,7 @@ html.life-route body {
 .life .lf-hand {
     font-family: 'Caveat', cursive;
     font-weight: 700;
-    color: var(--accent);
+    color: var(--accent-text);
     line-height: 1.1;
 }
 .life .lf-head .lf-hand {
