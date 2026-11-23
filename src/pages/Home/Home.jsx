@@ -17,6 +17,10 @@ export default function Home() {
     const [imageGallery, setImageGallery] = useState(null);
     const [currentImage, setCurrentImage] = useState(0);
 
+    // **text** in the data files becomes <strong>
+    const renderBold = (s) =>
+        s.split('**').map((part, i) => (i % 2 ? <strong key={i}>{part}</strong> : part));
+
     useEffect(() => {
         if (!imageGallery) return;
 
@@ -69,21 +73,20 @@ export default function Home() {
                                 <p style={{ marginTop: 0, marginBottom: '1.5rem' }}>
                                     I've always enjoyed figuring out how things work, especially the
                                     bits happening behind the screen. That curiosity turned into an
-                                    interest in backend development, full-stack applications, and
-                                    building things that solve everyday problems.
+                                    interest in <strong>backend development</strong>,{' '}
+                                    <strong>full-stack applications</strong>, and building things
+                                    that solve everyday problems.
                                 </p>
                                 <p style={{ marginTop: 0, marginBottom: '1.5rem' }}>
-                                    Most of my projects start with a random idea or something I want
-                                    to figure out. Sometimes it's an API, a workflow that could be a
-                                    little smoother, or just something I thought would be fun to
-                                    build. A lot of learning happens along the way, and that's
-                                    probably my favourite part of it.
+                                    Most of my projects start with a random idea, something I want
+                                    to try, or a problem I think I can make a little easier. I enjoy
+                                    figuring things out along the way just as much as seeing the
+                                    final result.
                                 </p>
                                 <p style={{ marginBottom: 0 }}>
-                                    Outside of that, I'm usually following some kind of sport,
-                                    gaming, planning my next trip or spending time with friends.
-                                    There's always something going on, and I like keeping it that
-                                    way.
+                                    Outside of coding, I'm usually following some kind of sport,
+                                    gaming, planning my next trip, or spending time with friends.
+                                    There's always something going on, and I like it that way.
                                 </p>
                             </div>
                             <MarginNote>✎ curiosity is where my projects begin</MarginNote>
@@ -141,7 +144,7 @@ export default function Home() {
                                         {e.highlights && (
                                             <ul className='journey-highlights'>
                                                 {e.highlights.map((h, i) => (
-                                                    <li key={i}>{h}</li>
+                                                    <li key={i}>{renderBold(h)}</li>
                                                 ))}
                                             </ul>
                                         )}

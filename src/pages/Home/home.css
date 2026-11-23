@@ -814,7 +814,7 @@ section h2 {
 .journey-role {
     font-size: 1rem;
     font-weight: 600;
-    color: var(--text-dim);
+    color: var(--accent-amber);
     margin: 0 0 6px;
 }
 
@@ -864,6 +864,16 @@ section h2 {
 
 .journey-link .project-btn {
     margin: 0;
+}
+
+.card strong,
+.journey-highlights strong {
+    color: var(--text);
+    font-weight: 700;
+}
+
+.about-card p {
+    color: var(--text-dim);
 }
 
 /* responsive: stack vertically, page scrolls normally */
@@ -957,7 +967,7 @@ section h2 {
     .navbar-link.is-active {
         border-left-color: transparent;
         border-bottom-color: var(--accent-amber);
-        padding-left: 2px; 
+        padding-left: 2px;
     }
 
     .navbar-link::after {

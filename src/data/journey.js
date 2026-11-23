@@ -9,9 +9,9 @@ export const EXPERIENCE = [
         description:
             'A year of getting familiar with semiconductor workflows and finding ways to make everyday processes a little less manual.',
         highlights: [
-            'Helped move 4 out of 5 manual approval steps into the existing MES workflow, saving around 8 hours of manual work each week.',
-            'Extended the MES application with Java and JavaScript, adding workflow support for different manufacturing operations.',
-            'Worked on features from start to finish, from gathering requirements with process engineers to testing and deploying the changes.',
+            'Helped move **4 out of 5** manual approval steps into the existing MES workflow, saving around **8 hours** of manual work each week.',
+            'Extended the MES application with **Java and JavaScript**, adding workflow support for different manufacturing operations.',
+            'Worked on features **from start to finish**, from gathering requirements with process engineers to testing and deploying the changes.',
         ],
     },
     {
@@ -24,9 +24,9 @@ export const EXPERIENCE = [
         description:
             'Where I first got my hands dirty with real-world software development, from building APIs to testing features and chasing down bugs.',
         highlights: [
-            'Spent time building Java APIs and figuring out how the backend connects with the rest of the application.',
-            'Got involved in the frontend too, working with HTML and JavaScript on the AGC Intelligent Workspace.',
-            'Put new features through their paces with 80+ test cases, catching bugs along the way.',
+            'Spent time building **Java APIs** and figuring out how the backend connects with the rest of the application.',
+            'Got involved in the frontend too, working with **HTML and JavaScript** on the AGC Intelligent Workspace.',
+            'Put new features through their paces with **80+ test cases**, catching bugs along the way.',
         ],
     },
 ];
